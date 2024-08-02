@@ -1,19 +1,81 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { AnimationSequence, useAnimate } from "framer-motion";
+import { useEffect } from "react";
+
+const text = "IntolerantIA";
 
 export default function Home() {
+  const [scope, animate] = useAnimate();
+
+  const sequence: AnimationSequence = [
+    [
+      "h1",
+      {
+        opacity: 1,
+      },
+      {
+        duration: 1.5,
+      },
+    ],
+    ...(text.split("").map((_, index) => [
+      `#span-${index}`,
+      {
+        opacity: 1,
+        transform: "translateY(0)",
+      },
+      {
+        duration: 0.05,
+        at: index * 0.1,
+      },
+    ]) as AnimationSequence),
+    [
+      "h2",
+      {
+        opacity: 1,
+      },
+      {
+        duration: 1,
+        delay: 0.2,
+      },
+    ],
+    [
+      "#scan-button",
+      {
+        opacity: 1,
+      },
+      {
+        duration: 1,
+      },
+    ],
+  ];
+
+  useEffect(() => {
+    animate(sequence);
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div ref={scope} className="min-h-screen flex items-center justify-center">
       <div>
-        <h1 className="text-center text-7xl font-bold text-foreground">
-          Welcome to <span className="text-violet-400">IntolerantIA!</span>
+        <h1 className="opacity-0 transform text-center text-7xl font-bold text-foreground">
+          Welcome to{" "}
+          <span className="text-violet-400">
+            {text.split("").map((letter, index) => (
+              <span key={index} id={`span-${index}`} className="opacity-0">
+                {letter}
+              </span>
+            ))}
+          </span>
+          !
         </h1>
-        <p className="text-foreground text-3xl text-balance text-center mt-12">
-          Here you will be able to take a quick look at the restaurant's menu to
-          see what foods you can eat and cannot eat.
-        </p>
+        <h2 className="opacity-0 text-foreground text-3xl text-balance text-center mt-12">
+          The place where you can be sure that the food you eat is safe.
+        </h2>
         <Button
-          className="flex mx-auto mt-12 bg-violet-400 font-bold px-12 py-8 hover:bg-violet-300 transition-all duration-300 hover:scale-105"
+          id="scan-button"
+          className="opacity-0 flex mx-auto mt-12 bg-violet-400 font-bold px-12 py-8 hover:bg-violet-300 transition-all duration-300 hover:scale-105"
           asChild
         >
           <Link href="/scan" className="w-fit">
