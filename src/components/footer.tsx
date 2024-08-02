@@ -1,6 +1,6 @@
 export function Footer() {
   return (
-    <footer className="text-violet-400 mb-4 container text-center">
+    <footer className="container mb-4 text-center text-violet-400">
       <p>
         Build by{" "}
         <a
@@ -23,5 +23,5 @@ export function Footer() {
         .
       </p>
     </footer>
-  );
+  )
 }

@@ -1,27 +1,27 @@
-"use server";
+"use server"
 
-import { scanSchema } from "@/lib/schemas";
+import { scanSchema } from "@/lib/schemas"
 
 type FormState = {
-  success: boolean | null;
-};
+  success: boolean | null
+}
 
 export async function scanAction(
   prevState: FormState,
-  data: FormData
+  data: FormData,
 ): Promise<FormState> {
-  const formData = Object.fromEntries(data);
-  const parsed = scanSchema.safeParse(formData);
+  const formData = Object.fromEntries(data)
+  const parsed = scanSchema.safeParse(formData)
 
   if (!parsed.success) {
     return {
       success: false,
-    };
+    }
   }
 
-  console.log("data", parsed.data);
+  console.log("data", parsed.data)
 
   return {
     success: true,
-  };
+  }
 }

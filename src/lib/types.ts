@@ -1,4 +1,4 @@
-import { scanSchema } from "@/lib/schemas";
-import { z } from "zod";
+import type { scanSchema } from "@/lib/schemas"
+import type { z } from "zod"
 
-export type ScanForm = z.infer<typeof scanSchema>;
+export type ScanForm = z.infer<typeof scanSchema>
