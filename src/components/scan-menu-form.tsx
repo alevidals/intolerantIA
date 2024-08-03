@@ -11,6 +11,7 @@ import { INTOLERANCES_AND_ALLERGIES } from "@/lib/constants"
 import { useScanStore } from "@/lib/store"
 import { capitalizeFirstLetter, fileToBase64 } from "@/lib/utils"
 import { IconUpload } from "@tabler/icons-react"
+import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 import { useFormState, useFormStatus } from "react-dom"
 
@@ -26,6 +27,8 @@ function SubmitButton() {
 
 export function ScanMenuForm() {
   const [fileList, setFileList] = useState<FileList | null>(null)
+  const router = useRouter()
+
   const scanStore = useScanStore()
 
   const [state, formAction] = useFormState(scanAction, null)
@@ -34,6 +37,7 @@ export function ScanMenuForm() {
   useEffect(() => {
     if (state?.success === true && state.data) {
       scanStore.setData(state.data)
+      router.push("/scan/result")
     }
   }, [state])
 
@@ -94,6 +98,7 @@ export function ScanMenuForm() {
         type="file"
         className="hidden"
         ref={fileInputRef}
+        accept="image/*"
         multiple
         onChange={async (event) => {
           setFileList(event.target.files)
