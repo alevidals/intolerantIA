@@ -1,148 +1,135 @@
 "use client"
 
 import { scanAction } from "@/app/(app)/scan/_actions"
+import { ErrorMessage } from "@/components/error-message"
+import { MenuPreviews } from "@/components/menu-previews"
 import { Button } from "@/components/ui/button"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
+import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { scanSchema } from "@/lib/schemas"
-import type { ScanForm } from "@/lib/types"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { IconX } from "@tabler/icons-react"
-import Image from "next/image"
-import { type FormEvent, useRef } from "react"
-import { useFormState } from "react-dom"
-import { type UseFormSetValue, useForm } from "react-hook-form"
+import { Label } from "@/components/ui/label"
+import { INTOLERANCES_AND_ALLERGIES } from "@/lib/constants"
+import { useScanStore } from "@/lib/store"
+import { capitalizeFirstLetter, fileToBase64 } from "@/lib/utils"
+import { IconUpload } from "@tabler/icons-react"
+import { useEffect, useRef, useState } from "react"
+import { useFormState, useFormStatus } from "react-dom"
 
-type ImagePreviewsProps = {
-  images: FileList
-  setImages: UseFormSetValue<ScanForm>
-}
+function SubmitButton() {
+  const { pending } = useFormStatus()
 
-function ImagePreviews({ images, setImages }: ImagePreviewsProps) {
   return (
-    <div className="flex flex-wrap gap-4">
-      {Array.from(images ?? []).map((image) => (
-        <div key={image.name} className="relative w-fit">
-          <Image
-            src={URL.createObjectURL(image)}
-            className="aspect-square object-cover"
-            alt="image"
-            height={100}
-            width={100}
-          />
-          <Button
-            type="button"
-            className="-right-2 -top-2 absolute h-5 w-5 rounded-full"
-            size="icon"
-            onClick={() => {
-              const dataTransfer = new DataTransfer()
-
-              const files = Array.from(images ?? []).filter(
-                (file) => image.name !== file.name,
-              )
-
-              for (const file of files) {
-                dataTransfer.items.add(file)
-              }
-
-              setImages("files", dataTransfer.files)
-            }}
-          >
-            <IconX className="h-3 w-3" />
-          </Button>
-        </div>
-      ))}
-    </div>
+    <Button className="w-fit bg-violet-400" disabled={pending}>
+      Submit
+    </Button>
   )
 }
 
 export function ScanMenuForm() {
-  const [state, formAction] = useFormState(scanAction, {
-    success: null,
-  })
+  const [fileList, setFileList] = useState<FileList | null>(null)
+  const scanStore = useScanStore()
 
-  const formRef = useRef<HTMLFormElement>(null)
+  const [state, formAction] = useFormState(scanAction, null)
 
-  const form = useForm<ScanForm>({
-    resolver: zodResolver(scanSchema),
-    defaultValues: {
-      text: "",
-      files: undefined,
-    },
-  })
+  // biome-ignore lint/correctness/useExhaustiveDependencies: we want to update the store when the state is updated
+  useEffect(() => {
+    if (state?.success === true && state.data) {
+      scanStore.setData(state.data)
+    }
+  }, [state])
 
-  const filesRef = form.register("files")
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
+  async function onAction(data: FormData) {
+    const promises = Array.from(fileList ?? []).map(
+      async (file) => await fileToBase64(file),
+    )
 
-    form.handleSubmit(() =>
-      formAction(new FormData(formRef.current as HTMLFormElement)),
-    )(event)
+    const base64files = await Promise.all(promises)
+
+    for (const file of base64files) {
+      data.append("files", file)
+    }
+
+    formAction(data)
   }
 
   return (
-    <Form {...form}>
-      <form
-        ref={formRef}
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-2"
+    <form className="flex flex-col gap-4" action={onAction}>
+      <ErrorMessage error={state?.errors?.allergyOrIntolerance?.[0]} />
+      <div>
+        <h3 className="mb-2 font-bold text-violet-400">Allergies</h3>
+        <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
+          {INTOLERANCES_AND_ALLERGIES.map((allergy) => (
+            <div
+              key={`${allergy}Allergy`}
+              className="flex items-center space-x-3"
+            >
+              <Checkbox name={`${allergy}Allergy`} />
+              <Label htmlFor={`${allergy}Allergy`}>
+                {capitalizeFirstLetter(allergy)}
+              </Label>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h3 className="mb-2 font-bold text-violet-400">Intolerances</h3>
+        <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
+          {INTOLERANCES_AND_ALLERGIES.map((intolerance) => (
+            <div
+              key={`${intolerance}Intolerance`}
+              className="flex items-center space-x-3"
+            >
+              <Checkbox name={`${intolerance}Intolerance`} />
+              <Label htmlFor={`${intolerance}Intolerance`}>
+                {capitalizeFirstLetter(intolerance)}
+              </Label>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <Input
+        type="file"
+        className="hidden"
+        ref={fileInputRef}
+        multiple
+        onChange={async (event) => {
+          setFileList(event.target.files)
+        }}
+      />
+      <ErrorMessage error={state?.errors?.files?.[0]} />
+
+      <MenuPreviews
+        images={fileList}
+        deleteImage={(image) => {
+          const dataTransfer = new DataTransfer()
+
+          const files = Array.from(fileList ?? []).filter(
+            (file) => image.name !== file.name,
+          )
+
+          for (const file of files) {
+            dataTransfer.items.add(file)
+          }
+
+          setFileList(dataTransfer.files)
+        }}
+      />
+
+      <Button
+        type="button"
+        variant="link"
+        className="self-start px-0"
+        onClick={() => {
+          fileInputRef.current?.click()
+        }}
       >
-        <FormField
-          control={form.control}
-          name="text"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>
-                Information about allergies and intolerances
-              </FormLabel>
-              <FormControl>
-                <Textarea
-                  className="w-64"
-                  placeholder="Allergies and intolerances"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="files"
-          render={() => {
-            return (
-              <FormItem>
-                <FormLabel>Menu images</FormLabel>
-                <FormControl>
-                  <Input
-                    type="file"
-                    multiple
-                    placeholder="images"
-                    {...filesRef}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )
-          }}
-        />
-
-        <ImagePreviews
-          images={form.getValues("files")}
-          setImages={form.setValue}
-        />
-        <Button className="w-fit">Submit</Button>
-      </form>
-    </Form>
+        Upload images
+        <IconUpload className="ml-2 h-4 w-4" />
+      </Button>
+      <SubmitButton />
+    </form>
   )
 }

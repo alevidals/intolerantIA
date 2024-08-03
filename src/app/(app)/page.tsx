@@ -71,14 +71,12 @@ export default function Home() {
           </span>
           !
         </h1>
-        {/* biome-ignore lint/nursery/useSortedClasses: <explanation> */}
-        <h2 className="text-foreground text-3xl text-balance text-center mt-12 opacity-0">
+        <h2 className="mt-12 text-balance text-center text-3xl text-foreground opacity-0">
           The place where you can be sure that the food you eat is safe.
         </h2>
         <Button
           id="scan-button"
-          // biome-ignore lint/nursery/useSortedClasses: <explanation>
-          className="opacity-0 flex mx-auto mt-12 bg-violet-400 font-bold px-12 py-8 hover:bg-violet-300 transition-all duration-300 hover:scale-105"
+          className="mx-auto mt-12 flex bg-violet-400 px-12 py-8 font-bold opacity-0 transition-all duration-300 hover:scale-105 hover:bg-violet-300"
           asChild
         >
           <Link href="/scan" className="w-fit">
