@@ -3,8 +3,7 @@
   "editor.formatOnPaste": true,
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "editor.codeActionsOnSave": {
-    "quickfix.biome": "explicit",
-    "source.organizeImports.biome": "always"
+    "quickfix.biome": "explicit"
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "biomejs.biome"
