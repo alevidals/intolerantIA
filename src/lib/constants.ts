@@ -17,5 +17,6 @@ export const INTOLERANCES_AND_ALLERGIES = [
 export const LINKS = [
   { name: "Home", href: "/", matches: ["/"] },
   { name: "About", href: "/about", matches: ["/about"] },
+  { name: "Privacy", href: "/privacy", matches: ["/privacy"] },
   { name: "Scan", href: "/scan", matches: ["/scan", "/scan/result"] },
 ]
