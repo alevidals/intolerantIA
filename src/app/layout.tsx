@@ -3,13 +3,36 @@ import type { Metadata } from "next"
 import { ThemeProvider } from "next-themes"
 import { Space_Grotesk } from "next/font/google"
 import "./globals.css"
+import { siteConfig } from "@/lib/config"
 
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "IntolerantIA",
-  description:
-    "IntolerantIA allows you to take a quick look at the restaurant's menu to see what foods you can and cannot eat. Especially useful for people with allergies and intolerances",
+  title: siteConfig.title,
+  description: siteConfig.description,
+  keywords: [
+    "intolerance",
+    "allergy",
+    "intolerant",
+    "allergic",
+    "food",
+    "menu",
+    "restaurant",
+    "safe",
+    "guide",
+  ],
+  authors: [
+    {
+      name: "Alejandro Vidal",
+      url: "https://github.com/alevidals",
+    },
+  ],
+  creator: "Alejandro Vidal",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
 }
 
 export default function RootLayout({
