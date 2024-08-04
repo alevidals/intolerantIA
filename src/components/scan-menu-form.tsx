@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label"
 import { INTOLERANCES_AND_ALLERGIES } from "@/lib/constants"
 import { useAiSettingsStore, useScanStore } from "@/lib/store"
 import { capitalizeFirstLetter, fileToBase64 } from "@/lib/utils"
-import { IconUpload } from "@tabler/icons-react"
+import { IconLoader, IconUpload } from "@tabler/icons-react"
 import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 import { useFormState, useFormStatus } from "react-dom"
@@ -19,8 +19,9 @@ function SubmitButton() {
   const { pending } = useFormStatus()
 
   return (
-    <Button className="w-fit bg-violet-400" disabled={pending}>
-      Submit
+    <Button className="w-fit gap-x-4 bg-violet-400" disabled={pending}>
+      <span className={`${pending ? "hidden" : "inline"}`}>Submit</span>
+      {pending ? <IconLoader className="animate-spin" /> : null}
     </Button>
   )
 }

@@ -3,7 +3,6 @@
 import { INTOLERANCES_AND_ALLERGIES } from "@/lib/constants"
 import { scanSchema } from "@/lib/schemas"
 import type { ScanForm, ScanResponse } from "@/lib/types"
-import {} from "ai"
 
 type FormState = {
   success: boolean
@@ -46,6 +45,8 @@ export async function scanAction(
       data: null,
     }
   }
+
+  await new Promise((resolve) => setTimeout(resolve, 1000))
 
   return {
     success: true,
