@@ -1,6 +1,6 @@
 export function Footer() {
   return (
-    <footer className="container mb-4">
+    <footer className="container my-4">
       <p className="text-center text-sm text-violet-400 md:text-left">
         Build by{" "}
         <a
