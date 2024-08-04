@@ -9,7 +9,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   return (
     <>
       <Header />
-      <main className="container flex-1">{children}</main>
+      <main className="flex-1">{children}</main>
       <Footer />
     </>
   )

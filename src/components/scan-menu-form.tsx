@@ -1,10 +1,10 @@
 "use client"
 
 import { scanAction } from "@/app/(app)/scan/_actions"
-import { ErrorMessage } from "@/components/error-message"
 import { MenuPreviews } from "@/components/menu-previews"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
+import { ErrorMessage } from "@/components/ui/error-message"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { INTOLERANCES_AND_ALLERGIES } from "@/lib/constants"
