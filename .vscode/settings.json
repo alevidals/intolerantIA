@@ -14,5 +14,6 @@
   },
   "[json]": {
     "editor.defaultFormatter": "biomejs.biome"
-  }
+  },
+  "files.eol": "\n"
 }
