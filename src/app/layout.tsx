@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { ThemeProvider } from "next-themes"
 import { Space_Grotesk } from "next/font/google"
 import "./globals.css"
+import { Toaster } from "@/components/ui/sonner"
 import { siteConfig } from "@/lib/config"
 
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] })
@@ -55,6 +56,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="relative flex min-h-screen flex-col">{children}</div>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

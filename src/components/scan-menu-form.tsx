@@ -8,7 +8,7 @@ import { ErrorMessage } from "@/components/ui/error-message"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { INTOLERANCES_AND_ALLERGIES } from "@/lib/constants"
-import { useScanStore } from "@/lib/store"
+import { useAiSettingsStore, useScanStore } from "@/lib/store"
 import { capitalizeFirstLetter, fileToBase64 } from "@/lib/utils"
 import { IconUpload } from "@tabler/icons-react"
 import { useRouter } from "next/navigation"
@@ -30,6 +30,7 @@ export function ScanMenuForm() {
   const router = useRouter()
 
   const scanStore = useScanStore()
+  const aiSettingsStore = useAiSettingsStore()
 
   const [state, formAction] = useFormState(scanAction, null)
 
@@ -54,12 +55,18 @@ export function ScanMenuForm() {
       data.append("files", file)
     }
 
+    data.append("model", aiSettingsStore.data?.model ?? "gpt-4o-mini")
+    data.append("apiKey", aiSettingsStore.data?.apiKey ?? "")
+
     formAction(data)
   }
 
   return (
     <form className="flex flex-col gap-4" action={onAction}>
       <ErrorMessage error={state?.errors?.allergyOrIntolerance?.[0]} />
+      <ErrorMessage error={state?.errors?.model?.[0]} />
+      <ErrorMessage error={state?.errors?.apiKey?.[0]} />
+
       <div>
         <h3 className="mb-2 font-bold text-violet-400">Allergies</h3>
         <div className="grid grid-cols-2 gap-2 md:grid-cols-3">

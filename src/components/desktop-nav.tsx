@@ -1,5 +1,6 @@
 "use client"
 
+import { IaSettingsPopover } from "@/components/ia-settings-popover"
 import { ModeToggle } from "@/components/mode-toggle"
 import { LINKS } from "@/lib/constants"
 import { cn } from "@/lib/utils"
@@ -26,6 +27,7 @@ export function DesktopNav() {
           </li>
         ))}
       </ul>
+      <IaSettingsPopover />
       <ModeToggle />
     </nav>
   )

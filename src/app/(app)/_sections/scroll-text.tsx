@@ -51,10 +51,10 @@ export default function ScrollText() {
     <div className="container relative h-[300dvh]" ref={ref}>
       <div className="sticky top-0 flex h-screen flex-col items-center justify-center">
         <div className="absolute max-w-2xl" id="step-1">
-          <h2 className="mb-4 flex overflow-hidden font-bold text-4xl text-foreground text-violet-400 md:text-6xl">
+          <h2 className="mb-4 flex overflow-hidden font-bold text-3xl text-foreground text-violet-400 md:text-6xl">
             <span className="translate-y-[200%]">How it works?</span>
           </h2>
-          <ul className="flex flex-col gap-y-4 text-xl md:text-2xl">
+          <ul className="flex flex-col gap-y-4 text-lg md:text-2xl">
             <li className="flex overflow-hidden">
               <span className="translate-y-[200%]">
                 You can select all your food allergies and intolerances.
@@ -74,10 +74,10 @@ export default function ScrollText() {
           </ul>
         </div>
         <div className="absolute max-w-2xl" id="step-2">
-          <h2 className="mb-4 flex overflow-hidden font-bold text-4xl text-foreground text-violet-400 md:text-6xl">
+          <h2 className="mb-4 flex overflow-hidden font-bold text-3xl text-foreground text-violet-400 md:text-6xl">
             <span className="translate-y-[200%]">Why use IntolerantIA?</span>
           </h2>
-          <p className="flex overflow-hidden text-pretty text-xl md:text-2xl">
+          <p className="flex overflow-hidden text-pretty text-lg md:text-2xl">
             <span className="translate-y-[200%]">
               Some restaurants don't list allergens on their menus, so
               IntolerantIA helps you quickly review a restaurant's menu to

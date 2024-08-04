@@ -1,6 +1,6 @@
 export default function AboutPage() {
   return (
-    <div className="container mt-20">
+    <div className="container my-20">
       <h1 className="mt-40 text-center text-7xl">About</h1>
       <div className="mx-auto mt-4 w-fit rounded-md bg-violet-400 px-2 py-1">
         Introducing IntolerantIA

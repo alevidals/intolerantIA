@@ -1,10 +1,12 @@
 "use client"
 
+import { IaSettingsPopover } from "@/components/ia-settings-popover"
 import { ModeToggle } from "@/components/mode-toggle"
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -28,6 +30,7 @@ export function MobileNav() {
       <SheetContent className="flex flex-col">
         <SheetHeader className="text-left">
           <SheetTitle className="text-3xl">IntolerantIA</SheetTitle>
+          <SheetDescription className="hidden" />
         </SheetHeader>
         <nav className="flex-1 ">
           <ul className="flex flex-col gap-x-4">
@@ -46,6 +49,9 @@ export function MobileNav() {
             ))}
             <li>
               <ModeToggle />
+            </li>
+            <li>
+              <IaSettingsPopover />
             </li>
           </ul>
         </nav>

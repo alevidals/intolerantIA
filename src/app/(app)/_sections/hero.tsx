@@ -1,7 +1,6 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { IconArrowNarrowRight } from "@tabler/icons-react"
 import { type AnimationSequence, useAnimate } from "framer-motion"
 import Link from "next/link"
 import { useEffect } from "react"
@@ -63,7 +62,7 @@ export default function Hero() {
       ref={scope}
     >
       <div>
-        <h1 className="mx-auto max-w-lg text-center font-bold text-5xl opacity-0 md:text-7xl">
+        <h1 className="mx-auto max-w-lg text-center font-bold text-4xl opacity-0 md:text-7xl">
           Welcome to{" "}
           <span className="text-violet-400">
             {text.split("").map((letter, index) => (
