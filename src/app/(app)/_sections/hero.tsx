@@ -30,7 +30,7 @@ const sequence: AnimationSequence = [
     },
   ]) as AnimationSequence),
   [
-    "h2",
+    "p",
     {
       opacity: 1,
     },
@@ -59,11 +59,11 @@ export default function Hero() {
 
   return (
     <section
-      className="mb-20 flex min-h-screen items-center justify-center"
+      className="container mb-20 flex min-h-screen items-center justify-center"
       ref={scope}
     >
       <div>
-        <h1 className="mx-auto max-w-lg text-center font-bold text-7xl opacity-0">
+        <h1 className="mx-auto max-w-lg text-center font-bold text-5xl opacity-0 md:text-7xl">
           Welcome to{" "}
           <span className="text-violet-400">
             {text.split("").map((letter, index) => (
@@ -75,16 +75,16 @@ export default function Hero() {
           </span>
           !
         </h1>
-        <h2 className="mt-6 max-w-2xl text-pretty text-center text-3xl opacity-0">
+        <p className="mt-6 max-w-2xl text-pretty text-center text-xl opacity-0 md:text-3xl">
           The place where you can be sure that the food you eat is safe.
-        </h2>
+        </p>
         <Button
           id="scan-button"
           className="group mx-auto mt-12 flex bg-violet-400 px-12 py-8 font-bold opacity-0 transition-all duration-300 hover:bg-violet-300"
           asChild
         >
           <Link href="/scan" className="w-fit">
-            <IconArrowNarrowRight className="transition-all duration-300 group-hover:translate-x-1" />
+            Scan
           </Link>
         </Button>
       </div>

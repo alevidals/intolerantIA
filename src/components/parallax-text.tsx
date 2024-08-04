@@ -11,7 +11,6 @@ import {
   useVelocity,
   wrap,
 } from "framer-motion"
-import { Plaster } from "next/font/google"
 import { useRef } from "react"
 
 type Props = {
@@ -22,13 +21,6 @@ type Props = {
 type SpanTextProps = {
   children: string
 }
-
-const plaster = Plaster({
-  subsets: ["latin"],
-  weight: "400",
-  style: "normal",
-  display: "swap",
-})
 
 export function SpanText({ children }: SpanTextProps) {
   return <span className="mr-[30px] block tracking-wide">{children} </span>
@@ -49,7 +41,8 @@ export function ParallaxText({ children, baseVelocity = 100 }: Props) {
   const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`)
 
   const directionFactor = useRef<number>(1)
-  useAnimationFrame((t, delta) => {
+
+  useAnimationFrame((_, delta) => {
     let moveBy = directionFactor.current * baseVelocity * (delta / 1000)
 
     if (velocityFactor.get() < 0) {
@@ -64,10 +57,10 @@ export function ParallaxText({ children, baseVelocity = 100 }: Props) {
   })
 
   return (
-    <div className="m-0 flex flex-nowrap overflow-hidden whitespace-nowrap leading-[0.8] tracking-[-2px]">
+    <div className="m-0 flex flex-nowrap overflow-hidden whitespace-nowrap tracking-[-2px]">
       <motion.div
         className={cn(
-          "flex flex-nowrap whitespace-nowrap font-extrabold text-[64px] uppercase [&>*:nth-child(even)]:text-violet-300",
+          "flex flex-nowrap whitespace-nowrap font-extrabold text-[40px] uppercase leading-[0.8] md:text-[64px] [&>*:nth-child(even)]:text-violet-300",
         )}
         style={{ x }}
       >
