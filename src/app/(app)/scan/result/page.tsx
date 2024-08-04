@@ -19,7 +19,7 @@ export default function ScanResultPage() {
           </AlertDescription>
         </Alert>
         <ScanResponse />
-        <div className="mt-5 flex justify-center">
+        <div className="mt-5">
           <ScanAgainButton />
         </div>
       </div>

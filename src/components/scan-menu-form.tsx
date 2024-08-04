@@ -7,7 +7,8 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { INTOLERANCES_AND_ALLERGIES } from "@/lib/constants"
-import { useAiSettingsStore, useScanStore } from "@/lib/store"
+import { useAiSettingsStore, useScanStore, useUserInfoStore } from "@/lib/store"
+import type { UserInfo } from "@/lib/types"
 import { capitalizeFirstLetter, fileToBase64 } from "@/lib/utils"
 import { IconLoader, IconUpload } from "@tabler/icons-react"
 import { useRouter } from "next/navigation"
@@ -47,6 +48,22 @@ function validateErrors(errors: NonNullable<NonNullable<FormState>["errors"]>) {
   }
 }
 
+function formDataToUserInfo(data: FormData) {
+  const userInfo = INTOLERANCES_AND_ALLERGIES.reduce(
+    (acc, allergyOrIntolerance) => {
+      acc[`${allergyOrIntolerance}Allergy`] =
+        data.get(`${allergyOrIntolerance}Allergy`) === "on"
+      acc[`${allergyOrIntolerance}Intolerance`] =
+        data.get(`${allergyOrIntolerance}Intolerance`) === "on"
+
+      return acc
+    },
+    {} as UserInfo,
+  )
+
+  return userInfo
+}
+
 function SubmitButton() {
   const { pending } = useFormStatus()
 
@@ -64,6 +81,7 @@ export function ScanMenuForm() {
 
   const scanStore = useScanStore()
   const aiSettingsStore = useAiSettingsStore()
+  const userInfoStore = useUserInfoStore()
 
   const [state, formAction] = useFormState(scanAction, null)
 
@@ -95,6 +113,9 @@ export function ScanMenuForm() {
     data.append("model", aiSettingsStore.data?.model ?? "gpt-4o-mini")
     data.append("apiKey", aiSettingsStore.data?.apiKey ?? "")
 
+    const userInfo = formDataToUserInfo(data)
+    userInfoStore.setData(userInfo)
+
     formAction(data)
   }
 
@@ -108,7 +129,10 @@ export function ScanMenuForm() {
               key={`${allergy}Allergy`}
               className="flex items-center space-x-3"
             >
-              <Checkbox name={`${allergy}Allergy`} />
+              <Checkbox
+                name={`${allergy}Allergy`}
+                defaultChecked={userInfoStore.data?.[`${allergy}Allergy`]}
+              />
               <Label htmlFor={`${allergy}Allergy`}>
                 {capitalizeFirstLetter(allergy)}
               </Label>
@@ -125,7 +149,12 @@ export function ScanMenuForm() {
               key={`${intolerance}Intolerance`}
               className="flex items-center space-x-3"
             >
-              <Checkbox name={`${intolerance}Intolerance`} />
+              <Checkbox
+                name={`${intolerance}Intolerance`}
+                defaultChecked={
+                  userInfoStore.data?.[`${intolerance}Intolerance`]
+                }
+              />
               <Label htmlFor={`${intolerance}Intolerance`}>
                 {capitalizeFirstLetter(intolerance)}
               </Label>

@@ -72,6 +72,9 @@ export function ParallaxText({ children, baseVelocity = 100 }: Props) {
         <SpanText>IntolerantIA</SpanText>
         <SpanText>IntolerantIA</SpanText>
         <SpanText>IntolerantIA</SpanText>
+        <SpanText>IntolerantIA</SpanText>
+        <SpanText>IntolerantIA</SpanText>
+        <SpanText>IntolerantIA</SpanText>
       </motion.div>
     </div>
   )

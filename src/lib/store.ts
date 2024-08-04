@@ -1,4 +1,4 @@
-import type { AiSettings, ScanResponse } from "@/lib/types"
+import type { AiSettings, ScanResponse, UserInfo } from "@/lib/types"
 import { create } from "zustand"
 
 type ScanStore = {
@@ -11,9 +11,22 @@ type AiSettingsStore = {
   setData: (data: AiSettings | null) => void
 }
 
+type UserInfoStore = {
+  data: UserInfo | null
+  setData: (data: UserInfo | null) => void
+}
+
 export const useScanStore = create<ScanStore>((set) => ({
   data: null,
   setData: (data: ScanResponse | null) =>
+    set({
+      data,
+    }),
+}))
+
+export const useUserInfoStore = create<UserInfoStore>((set) => ({
+  data: null,
+  setData: (data: UserInfo | null) =>
     set({
       data,
     }),

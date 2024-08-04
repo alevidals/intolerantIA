@@ -4,6 +4,43 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useScanStore } from "@/lib/store"
 import Link from "next/link"
 
+type ResponseCardProps = {
+  items: string[]
+  type: "canEat" | "cannotEat" | "askRestaurant"
+}
+
+export function ResponseCard({ type, items }: ResponseCardProps) {
+  const titles = {
+    canEat: "Food that can be eaten",
+    cannotEat: "Food that cannot be eaten",
+    askRestaurant: "Food that should be asked",
+  }
+
+  const colors = {
+    canEat: "text-green-400",
+    cannotEat: "text-red-400",
+    askRestaurant: "text-yellow-400",
+  }
+
+  const title = titles[type]
+  const color = colors[type]
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle className={`${color}`}>{title}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <ul className="list-inside list-disc">
+          {items.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      </CardContent>
+    </Card>
+  )
+}
+
 export function ScanResponse() {
   const scanStore = useScanStore()
 
@@ -26,49 +63,13 @@ export function ScanResponse() {
   }
 
   return (
-    <div className="mx-auto grid max-w-4xl grid-cols-3 gap-4">
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-emerald-400">
-            Food that can be eaten
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <ul>
-            {scanStore.data?.canEat.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </CardContent>
-      </Card>
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-red-400">
-            Food that cannot be eaten
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <ul>
-            {scanStore.data?.cannotEat.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </CardContent>
-      </Card>
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-yellow-400">
-            Food that should be asked
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <ul>
-            {scanStore.data?.askRestaurant.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </CardContent>
-      </Card>
+    <div className="mx-auto grid max-w-4xl grid-cols-1 gap-4 lg:grid-cols-3">
+      <ResponseCard items={scanStore.data?.canEat ?? []} type="canEat" />
+      <ResponseCard items={scanStore.data?.cannotEat ?? []} type="cannotEat" />
+      <ResponseCard
+        items={scanStore.data?.askRestaurant ?? []}
+        type="askRestaurant"
+      />
     </div>
   )
 }
