@@ -58,6 +58,7 @@ export const scanResponseSchema = z.object({
   canEat: z.array(z.string()),
   cannotEat: z.array(z.string()),
   askRestaurant: z.array(z.string()),
+  success: z.boolean(),
 })
 
 // TODO: add error messages

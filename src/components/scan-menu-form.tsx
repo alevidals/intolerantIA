@@ -1,10 +1,9 @@
 "use client"
 
-import { scanAction } from "@/app/(app)/scan/_actions"
+import { type FormState, scanAction } from "@/app/(app)/scan/_actions"
 import { MenuPreviews } from "@/components/menu-previews"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
-import { ErrorMessage } from "@/components/ui/error-message"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { INTOLERANCES_AND_ALLERGIES } from "@/lib/constants"
@@ -14,6 +13,39 @@ import { IconLoader, IconUpload } from "@tabler/icons-react"
 import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 import { useFormState, useFormStatus } from "react-dom"
+import { toast } from "sonner"
+
+function validateErrors(errors: NonNullable<NonNullable<FormState>["errors"]>) {
+  if (errors.allergyOrIntolerance?.[0]) {
+    toast.error(errors.allergyOrIntolerance[0])
+    return
+  }
+
+  if (errors.files?.[0]) {
+    toast.error(errors.files[0])
+    return
+  }
+
+  if (errors.model?.[0]) {
+    toast.error(errors.model[0])
+    return
+  }
+
+  if (errors.apiKey?.[0]) {
+    toast.error(errors.apiKey[0])
+    return
+  }
+
+  if (errors.invalidImage?.[0]) {
+    toast.error(errors.invalidImage[0])
+    return
+  }
+
+  if (errors.unexpectedError?.[0]) {
+    toast.error(errors.unexpectedError[0])
+    return
+  }
+}
 
 function SubmitButton() {
   const { pending } = useFormStatus()
@@ -41,6 +73,10 @@ export function ScanMenuForm() {
       scanStore.setData(state.data)
       router.push("/scan/result")
     }
+
+    if (state?.errors) {
+      validateErrors(state.errors)
+    }
   }, [state])
 
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -64,10 +100,6 @@ export function ScanMenuForm() {
 
   return (
     <form className="flex flex-col gap-4" action={onAction}>
-      <ErrorMessage error={state?.errors?.allergyOrIntolerance?.[0]} />
-      <ErrorMessage error={state?.errors?.model?.[0]} />
-      <ErrorMessage error={state?.errors?.apiKey?.[0]} />
-
       <div>
         <h3 className="mb-2 font-bold text-violet-400">Allergies</h3>
         <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
@@ -112,7 +144,6 @@ export function ScanMenuForm() {
           setFileList(event.target.files)
         }}
       />
-      <ErrorMessage error={state?.errors?.files?.[0]} />
 
       <MenuPreviews
         images={fileList}

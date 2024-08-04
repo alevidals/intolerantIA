@@ -1,16 +1,21 @@
 "use server"
 
 import { INTOLERANCES_AND_ALLERGIES } from "@/lib/constants"
-import { scanSchema } from "@/lib/schemas"
+import { scanResponseSchema, scanSchema } from "@/lib/schemas"
 import type { ScanForm, ScanResponse } from "@/lib/types"
+import { createOpenAI } from "@ai-sdk/openai"
+import type { UserContent } from "ai"
+import { generateObject } from "ai"
 
-type FormState = {
+export type FormState = {
   success: boolean
   errors:
     | ({
         [key in keyof ScanForm]?: string[]
       } & {
         allergyOrIntolerance?: string[]
+        invalidImage?: string[]
+        unexpectedError?: string[]
       })
     | null
   data: ScanResponse | null
@@ -46,80 +51,95 @@ export async function scanAction(
     }
   }
 
-  await new Promise((resolve) => setTimeout(resolve, 1000))
+  const allergies: string[] = []
+  const intolerances: string[] = []
 
-  return {
-    success: true,
-    data: {
-      canEat: [],
-      cannotEat: [],
-      askRestaurant: [],
-    },
-    errors: null,
+  for (const [key, value] of Object.entries(parsed.data)) {
+    if (typeof value === "boolean" && value === true) {
+      if (key.includes("Allergy")) {
+        allergies.push(key.split("Allergy")[0])
+      } else {
+        intolerances.push(key.split("Intolerance")[0])
+      }
+    }
   }
 
-  // const allergies: string[] = []
-  // const intolerances: string[] = []
+  let prompt =
+    "You are a nutritionist expert in allergies and intolerance Analyze the following restaurant menu and classify each item into three categories based on the specified allergies and intolerances: canEat, cannotEat, and askRestaurant (for items that might be dangerous and need confirmation from the restaurant)."
 
-  // for (const [key, value] of Object.entries(parsed.data)) {
-  //   if (typeof value === "boolean" && value === true) {
-  //     if (key.includes("Allergy")) {
-  //       allergies.push(key.split("Allergy")[0])
-  //     } else {
-  //       intolerances.push(key.split("Intolerance")[0])
-  //     }
-  //   }
-  // }
+  if (allergies.length > 0) {
+    prompt += `The user's allergies are: ${allergies.join(",")}.`
+  }
 
-  // let prompt = ""
+  if (intolerances.length > 0) {
+    prompt += ` The user's intolerances are: ${intolerances.join(",")}.`
+  }
 
-  // if (allergies.length > 0) {
-  //   prompt += `I'm allergic to ${allergies.join(", ")}. `
-  // }
+  prompt += ` Return the result in JSON format with the following structure: {"canEat": [], "cannotEat": [], "askRestaurant": [], "success": true/false}. If any provided input is not a menu, set "success" to false. Do not write anything else. Escape any characters that need to be escaped or is not valid on JSON.`
 
-  // if (intolerances.length > 0) {
-  //   prompt += `I'm intolerant to ${intolerances.join(", ")}. `
-  // }
+  const content: UserContent = [
+    {
+      type: "text",
+      text: prompt,
+    },
+  ]
 
-  // prompt +=
-  //   "Which items on this menu can I eat, which can I not eat and which should I ask the restaurant to be sure I can eat them? Return me a json with the following body canEat, cannotEat, askRestaurant. Do not write anything else."
+  for (const file of parsed.data.files) {
+    content.push({
+      type: "image",
+      image: file,
+    })
+  }
 
-  // const content: UserContent = [
-  //   {
-  //     type: "text",
-  //     text: prompt,
-  //   },
-  // ]
+  console.info("Processing...")
 
-  // for (const file of parsed.data.files) {
-  //   content.push({
-  //     type: "image",
-  //     image: file,
-  //   })
-  // }
+  const openai = createOpenAI({
+    apiKey: process.env.OPENAI,
+  })
 
-  // console.info("Processing...")
+  try {
+    const result = await generateObject({
+      model: openai("gpt-4o-mini"),
+      maxRetries: 1,
+      maxTokens: 1024,
+      temperature: 0,
+      messages: [
+        {
+          role: "user",
+          content,
+        },
+      ],
+      schema: scanResponseSchema,
+    })
 
-  // const openai = createOpenAI({
-  //   apiKey: process.env.OPENAI,
-  // })
+    console.info("Processing done")
 
-  // const result = await generateObject({
-  //   model: openai("gpt-4o-mini"),
-  //   messages: [
-  //     {
-  //       role: "user",
-  //       content,
-  //     },
-  //   ],
-  //   schema: scanResponseSchema,
-  // })
+    if (!result.object.success) {
+      return {
+        success: false,
+        errors: {
+          invalidImage: [
+            "The image/s you uploaded are not a menu. Please upload a menu image. If you think this is a mistake, try again.",
+          ],
+        },
+        data: null,
+      }
+    }
 
-  // console.info("Processing done")
+    return {
+      success: true,
+      data: result.object,
+      errors: null,
+    }
+  } catch (error) {
+    console.error(error)
 
-  // return {
-  //   success: true,
-  //   data: result.object,
-  //   errors: null,
-  // }
+    return {
+      success: false,
+      errors: {
+        unexpectedError: ["An unexpected error occurred. Please try again."],
+      },
+      data: null,
+    }
+  }
 }
