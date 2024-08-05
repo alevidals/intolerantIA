@@ -18,7 +18,7 @@ export default async function ScanResultPage() {
   const t = await getI18n()
 
   return (
-    <div className="container mt-24">
+    <div className="container mt-24 mb-10">
       <h2 className="mb-10 font-bold text-3xl">{t("thanksForScanning")}</h2>
       <div>
         <Alert className="mb-4 border-violet-400 text-violet-400">

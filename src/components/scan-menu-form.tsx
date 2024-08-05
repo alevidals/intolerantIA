@@ -1,6 +1,6 @@
 "use client"
 
-import { type FormState, scanAction } from "@/app/(app)/[locale]/scan/_actions"
+import { type FormState, scanAction } from "@/app/[locale]/(app)/scan/_actions"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"

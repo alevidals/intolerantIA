@@ -50,7 +50,7 @@ const sequence: AnimationSequence = [
   ],
 ]
 
-export default function Hero() {
+export function Hero() {
   const t = useI18n()
 
   const [scope, animate] = useAnimate()

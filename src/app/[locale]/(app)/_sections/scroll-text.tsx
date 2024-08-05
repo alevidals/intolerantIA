@@ -8,7 +8,7 @@ import {
 } from "framer-motion"
 import { useEffect, useRef } from "react"
 
-export default function ScrollText() {
+export function ScrollText() {
   const t = useI18n()
   const ref = useRef<HTMLDivElement>(null)
   const animControls = useRef<AnimationPlaybackControls>()
