@@ -22,24 +22,26 @@ export const MAX_FILES = 4
 
 export const VALID_IMAGE_EXTENSIONS = ["png", "jpg", "jpeg"]
 
+export const locales = ["/es", "/en"]
+
 export const LINKS = [
-  { name: "Home", code: "home" as const, href: "/", matches: ["/"] },
+  { name: "Home", code: "home" as const, href: "/", matches: locales },
   {
     name: "About",
     code: "about" as const,
     href: "/about",
-    matches: ["/about"],
+    matches: locales.map((locale) => `${locale}/about`),
   },
   {
     name: "Privacy",
     code: "privacy" as const,
     href: "/privacy",
-    matches: ["/privacy"],
+    matches: locales.map((locale) => `${locale}/privacy`),
   },
   {
     name: "Scan",
     code: "scan" as const,
     href: "/scan",
-    matches: ["/scan", "/scan/result"],
+    matches: locales.map((locale) => `${locale}/scan`),
   },
 ]

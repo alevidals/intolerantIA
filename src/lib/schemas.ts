@@ -12,7 +12,6 @@ const apiKey = z
     message: "apiKeyRequired",
   })
 
-// TODO: add error messages
 export const scanSchema = z
   .object({
     glutenIntolerance: z.boolean(),
@@ -63,7 +62,6 @@ export const scanResponseSchema = z.object({
   success: z.boolean(),
 })
 
-// TODO: add error messages
 export const aiSettingsSchema = z.object({
   apiKey,
   model,

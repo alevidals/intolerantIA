@@ -116,6 +116,8 @@ const esTranslations: TranslationKeys = {
   english: "Inglés",
   spanish: "Español",
   localeSwitcher: "Cambiar el idioma",
+  siteDescription:
+    "IntolerantIA te permite echar un vistazo rápido al menú del restaurante para ver qué alimentos puedes comer y cuáles no. Especialmente útil para personas con alergias e intolerancias.",
 } as const
 
 export default esTranslations

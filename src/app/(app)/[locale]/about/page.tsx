@@ -1,4 +1,13 @@
 import { getI18n } from "@/locales/server"
+import type { Metadata } from "next"
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getI18n()
+
+  return {
+    title: `${t("about")} - IntolerantIA`,
+  }
+}
 
 export default async function AboutPage() {
   const t = await getI18n()

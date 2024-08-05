@@ -2,7 +2,16 @@ import { ScanMenuForm } from "@/components/scan-menu-form"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { getI18n } from "@/locales/server"
 import { IconAlertCircle } from "@tabler/icons-react"
+import type { Metadata } from "next"
 import colors from "tailwindcss/colors"
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getI18n()
+
+  return {
+    title: `${t("scan")} - IntolerantIA`,
+  }
+}
 
 export default async function ScanPage() {
   const t = await getI18n()

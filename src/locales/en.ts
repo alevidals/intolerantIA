@@ -112,6 +112,8 @@ const enTranslations: TranslationKeys = {
   english: "English",
   spanish: "Spanish",
   localeSwitcher: "Switch language",
+  siteDescription:
+    "IntolerantIA allows you to take a quick look at the restaurant's menu to see what foods you can and cannot eat. Especially useful for people with allergies and intolerances",
 } as const
 
 export default enTranslations
