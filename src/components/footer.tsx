@@ -1,7 +1,7 @@
 export function Footer() {
   return (
     <footer className="container my-4">
-      <p className="text-center text-sm text-violet-400 md:text-left">
+      <p className="text-left text-sm text-violet-400">
         Build by{" "}
         <a
           target="_blank"

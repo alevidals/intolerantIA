@@ -9,7 +9,7 @@ type Props = {
 
 export function MenuPreviews({ images, deleteImage }: Props) {
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
       {Array.from(images ?? []).map((image) => (
         <div key={image.name} className="relative w-fit">
           <Image

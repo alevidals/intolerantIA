@@ -1,11 +1,11 @@
 "use client"
 
 import { type FormState, scanAction } from "@/app/(app)/scan/_actions"
-import { MenuPreviews } from "@/components/menu-previews"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { UploadImagesButton } from "@/components/upload-images-button"
 import {
   INTOLERANCES_AND_ALLERGIES,
   MAX_FILES,
@@ -15,9 +15,9 @@ import {
 import { useAiSettingsStore, useScanStore, useUserInfoStore } from "@/lib/store"
 import type { UserInfo } from "@/lib/types"
 import { capitalizeFirstLetter, fileToBase64 } from "@/lib/utils"
-import { IconLoader, IconUpload } from "@tabler/icons-react"
+import { IconLoader } from "@tabler/icons-react"
 import { useRouter } from "next/navigation"
-import { useEffect, useRef, useState } from "react"
+import { type ChangeEvent, useEffect, useRef, useState } from "react"
 import { useFormState, useFormStatus } from "react-dom"
 import { toast } from "sonner"
 
@@ -116,6 +116,31 @@ export function ScanMenuForm() {
 
   const fileInputRef = useRef<HTMLInputElement>(null)
 
+  function handleOnChangeFile(event: ChangeEvent<HTMLInputElement>) {
+    const fileList = event.target.files
+
+    if (!fileList) return
+
+    if (fileList.length > MAX_FILES) {
+      toast.error("You can only upload up to 4 images.")
+      return
+    }
+
+    if (!validateFormatFiles(fileList)) {
+      toast.error(
+        "Invalid file format. Please upload only images with valid extensions.",
+      )
+      return
+    }
+
+    if (Array.from(fileList).some((file) => file.size > MAX_FILE_SIZE)) {
+      toast.error("The maximum file size is 10MB.")
+      return
+    }
+
+    setFileList(fileList)
+  }
+
   async function onAction(data: FormData) {
     const promises = Array.from(fileList ?? []).map(
       async (file) => await fileToBase64(file),
@@ -188,69 +213,15 @@ export function ScanMenuForm() {
         ref={fileInputRef}
         accept="image/png, image/jpeg, image/jpg"
         multiple
-        onChange={async (event) => {
-          const fileList = event.target.files
-
-          if (!fileList) return
-
-          if (fileList.length > MAX_FILES) {
-            toast.error("You can only upload up to 4 images.")
-            return
-          }
-
-          if (!validateFormatFiles(fileList)) {
-            toast.error(
-              "Invalid file format. Please upload only images with valid extensions.",
-            )
-            return
-          }
-
-          if (Array.from(fileList).some((file) => file.size > MAX_FILE_SIZE)) {
-            toast.error("The maximum file size is 10MB.")
-            return
-          }
-
-          setFileList(fileList)
-        }}
+        onChange={handleOnChangeFile}
       />
 
-      {Array.from(fileList ?? []).length > 0 ? (
-        <div className="mt-4">
-          <MenuPreviews
-            images={fileList}
-            deleteImage={(image) => {
-              const dataTransfer = new DataTransfer()
+      <UploadImagesButton
+        fileInputRef={fileInputRef}
+        fileList={fileList}
+        setFileList={setFileList}
+      />
 
-              const files = Array.from(fileList ?? []).filter(
-                (file) => image.name !== file.name,
-              )
-
-              for (const file of files) {
-                dataTransfer.items.add(file)
-              }
-
-              setFileList(dataTransfer.files)
-            }}
-          />
-        </div>
-      ) : null}
-
-      <div>
-        <Button
-          type="button"
-          variant="link"
-          className="self-start px-0"
-          onClick={() => {
-            fileInputRef.current?.click()
-          }}
-        >
-          Upload images
-          <IconUpload className="ml-2 h-4 w-4" />
-        </Button>
-        <p className="text-muted-foreground text-sm">
-          The maximum file size is 10MB and you can upload up to 4 images.
-        </p>
-      </div>
       <SubmitButton />
     </form>
   )
