@@ -16,6 +16,8 @@ export const INTOLERANCES_AND_ALLERGIES = [
   "cowProtein",
 ] as const
 
+export const LOCALE_COOKIE = "Next-Locale"
+
 export const MAX_FILE_SIZE = 10 * 1024 * 1024
 
 export const MAX_FILES = 4
