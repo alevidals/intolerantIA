@@ -123,7 +123,7 @@ export function ScanMenuForm() {
     <form className="flex flex-col gap-4" action={onAction}>
       <div>
         <h3 className="mb-2 font-bold text-violet-400">Allergies</h3>
-        <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-2">
           {INTOLERANCES_AND_ALLERGIES.map((allergy) => (
             <div
               key={`${allergy}Allergy`}
@@ -131,6 +131,7 @@ export function ScanMenuForm() {
             >
               <Checkbox
                 name={`${allergy}Allergy`}
+                id={`${allergy}Allergy`}
                 defaultChecked={userInfoStore.data?.[`${allergy}Allergy`]}
               />
               <Label htmlFor={`${allergy}Allergy`}>
@@ -143,7 +144,7 @@ export function ScanMenuForm() {
 
       <div>
         <h3 className="mb-2 font-bold text-violet-400">Intolerances</h3>
-        <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-2">
           {INTOLERANCES_AND_ALLERGIES.map((intolerance) => (
             <div
               key={`${intolerance}Intolerance`}
@@ -151,6 +152,7 @@ export function ScanMenuForm() {
             >
               <Checkbox
                 name={`${intolerance}Intolerance`}
+                id={`${intolerance}Intolerance`}
                 defaultChecked={
                   userInfoStore.data?.[`${intolerance}Intolerance`]
                 }
@@ -174,22 +176,26 @@ export function ScanMenuForm() {
         }}
       />
 
-      <MenuPreviews
-        images={fileList}
-        deleteImage={(image) => {
-          const dataTransfer = new DataTransfer()
+      {Array.from(fileList ?? []).length > 0 ? (
+        <div className="mt-4">
+          <MenuPreviews
+            images={fileList}
+            deleteImage={(image) => {
+              const dataTransfer = new DataTransfer()
 
-          const files = Array.from(fileList ?? []).filter(
-            (file) => image.name !== file.name,
-          )
+              const files = Array.from(fileList ?? []).filter(
+                (file) => image.name !== file.name,
+              )
 
-          for (const file of files) {
-            dataTransfer.items.add(file)
-          }
+              for (const file of files) {
+                dataTransfer.items.add(file)
+              }
 
-          setFileList(dataTransfer.files)
-        }}
-      />
+              setFileList(dataTransfer.files)
+            }}
+          />
+        </div>
+      ) : null}
 
       <Button
         type="button"

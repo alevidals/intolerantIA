@@ -30,6 +30,8 @@ export const scanSchema = z
     sesameSeedsIntolerance: z.boolean(),
     mollusksIntolerance: z.boolean(),
     lupinsIntolerance: z.boolean(),
+    lactoseIntolerance: z.boolean(),
+    cowProteinIntolerance: z.boolean(),
     glutenAllergy: z.boolean(),
     crustaceansAllergy: z.boolean(),
     eggsAllergy: z.boolean(),
@@ -43,6 +45,8 @@ export const scanSchema = z
     sesameSeedsAllergy: z.boolean(),
     mollusksAllergy: z.boolean(),
     lupinsAllergy: z.boolean(),
+    lactoseAllergy: z.boolean(),
+    cowProteinAllergy: z.boolean(),
     model,
     apiKey,
     files: z.array(z.string().min(1)).min(1, {

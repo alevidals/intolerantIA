@@ -5,7 +5,7 @@ import colors from "tailwindcss/colors"
 
 export default function ScanPage() {
   return (
-    <div className="container mt-20">
+    <div className="container mt-20 mb-10">
       <h2 className="mb-4 font-bold text-xl">
         Please fill out the form below to scan the menu and add your allergies
         and intolerances

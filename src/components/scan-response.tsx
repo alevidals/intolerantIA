@@ -63,7 +63,7 @@ export function ScanResponse() {
   }
 
   return (
-    <div className="mx-auto grid max-w-4xl grid-cols-1 gap-4 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
       <ResponseCard items={scanStore.data?.canEat ?? []} type="canEat" />
       <ResponseCard items={scanStore.data?.cannotEat ?? []} type="cannotEat" />
       <ResponseCard

@@ -12,6 +12,8 @@ export const INTOLERANCES_AND_ALLERGIES = [
   "sesameSeeds",
   "mollusks",
   "lupins",
+  "lactose",
+  "cowProtein",
 ] as const
 
 export const LINKS = [

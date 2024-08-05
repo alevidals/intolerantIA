@@ -8,7 +8,7 @@ export default function ScanResultPage() {
   return (
     <div className="container mt-20 flex items-center justify-center">
       <div>
-        <Alert className="mx-auto mb-4 max-w-4xl border-violet-400 text-violet-400">
+        <Alert className="mb-4 border-violet-400 text-violet-400">
           <IconAlertCircle color={colors.violet[400]} className="h-4 w-4" />
           <AlertTitle>Please read this!</AlertTitle>
           <AlertDescription>
