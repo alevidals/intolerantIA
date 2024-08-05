@@ -26,8 +26,13 @@ export function MobileNav() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button className="p-2 md:hidden" variant="ghost">
+        <Button
+          className="p-2 md:hidden"
+          variant="ghost"
+          aria-label={t("menu")}
+        >
           <IconMenuDeep />
+          <span className="sr-only">{t("menu")}</span>
         </Button>
       </SheetTrigger>
       <SheetContent className="flex flex-col">

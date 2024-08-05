@@ -177,6 +177,7 @@ export function ScanMenuForm() {
               className="flex items-center space-x-3"
             >
               <Checkbox
+                aria-label={`${capitalizeFirstLetter(t(allergy))} allergy`}
                 name={`${allergy}Allergy`}
                 id={`${allergy}Allergy`}
                 defaultChecked={userInfoStore.data?.[`${allergy}Allergy`]}
@@ -198,6 +199,7 @@ export function ScanMenuForm() {
               className="flex items-center space-x-3"
             >
               <Checkbox
+                aria-label={`${capitalizeFirstLetter(t(intolerance))} intolerance`}
                 name={`${intolerance}Intolerance`}
                 id={`${intolerance}Intolerance`}
                 defaultChecked={

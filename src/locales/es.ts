@@ -122,6 +122,7 @@ const esTranslations: TranslationKeys = {
   pageNotFoundDescription:
     "La página que buscas no está disponible en este momento. Es posible que la dirección haya sido escrita incorrectamente, que la página haya sido movida a otra ubicación, o que ya no exista.",
   pageNotFoundButton: "Volver a la página principal",
+  menu: "Menú de navegación",
 } as const
 
 export default esTranslations

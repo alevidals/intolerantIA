@@ -105,6 +105,7 @@ export type TranslationKeys = {
   pageNotFound: string
   pageNotFoundDescription: string
   pageNotFoundButton: string
+  menu: string
 }
 
 export type TranslationKey = keyof TranslationKeys

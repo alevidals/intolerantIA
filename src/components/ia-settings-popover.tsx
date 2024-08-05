@@ -58,8 +58,14 @@ export function IaSettingsPopover() {
   return (
     <Popover open={open} onOpenChange={setOpen} modal={true}>
       <PopoverTrigger asChild>
-        <Button variant="ghost" size="icon" className="h-8 w-8 px-0">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="h-8 w-8 px-0"
+          aria-label={t("iaSettings")}
+        >
           <IconAdjustmentsHorizontal className="h-5 w-5" />
+          <span className="sr-only">{t("iaSettings")}</span>
         </Button>
       </PopoverTrigger>
       <PopoverContent className="h-80 w-80 overflow-y-scroll md:h-auto md:overflow-y-auto">

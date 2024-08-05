@@ -118,6 +118,7 @@ const enTranslations: TranslationKeys = {
   pageNotFoundDescription:
     "The page you are looking for is currently unavailable. It is possible that the address was typed incorrectly, the page has been moved to another location, or it no longer exists.",
   pageNotFoundButton: "Back to home",
+  menu: "Navigation menu",
 } as const
 
 export default enTranslations
