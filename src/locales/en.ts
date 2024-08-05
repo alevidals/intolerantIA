@@ -35,7 +35,7 @@ const enTranslations: TranslationKeys = {
     "At IntolerantIA, the privacy and security of our users are of utmost importance. We are committed to protecting personal information and ensuring a safe and reliable experience when using our application. Below are the privacy policies that govern the use of IntolerantIA.",
   privacy1: "No User Data Collection",
   privacy1Text:
-    "IntolerantIA does not collect, store, or share users' personal data. The information provided, such as food allergies and intolerances, is used exclusively during the active session of the application, and we do not store any of this information.",
+    "IntolerantIA does not collect, store, or share users' personal data. The information provided, such as food allergies and intolerances, is used exclusively during the active session of the application, and we do not store any of this information. We only save the selected language in the browser's cookies, as this is mandatory for the application to work.",
   privacy2: "Security of Keys",
   privacy2Text:
     "User-provided keys are not saved or stored at any time. These keys are maintained solely in the application's memory while it is in use. If the user refreshes the page or closes the session, the keys are automatically deleted, thus ensuring the highest level of security for sensitive information.",

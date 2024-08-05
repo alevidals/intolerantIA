@@ -37,7 +37,7 @@ const esTranslations: TranslationKeys = {
     "En IntolerantIA, la privacidad y seguridad de nuestros usuarios son de suma importancia. Estamos comprometidos a proteger la información personal y asegurar una experiencia segura y confiable al usar nuestra aplicación. A continuación, se presentan las políticas de privacidad que rigen el uso de IntolerantIA.",
   privacy1: "No Recolección de Datos del Usuario",
   privacy1Text:
-    "IntolerantIA no recopila, almacena ni comparte datos personales de los usuarios. La información proporcionada, como alergias e intolerancias alimentarias, se utiliza exclusivamente durante la sesión activa de la aplicación y no almacenamos ninguna de esta información.",
+    "IntolerantIA no recopila, almacena ni comparte datos personales de los usuarios. La información proporcionada, como alergias e intolerancias alimentarias, se utiliza exclusivamente durante la sesión activa de la aplicación y no almacenamos ninguna de esta información. Sólo guardamos en las cookies del navegador el idioma seleccionado ya que es obligatorio para el funcionamiento de la aplicación.",
   privacy2: "Seguridad de Claves",
   privacy2Text:
     "Las claves proporcionadas por el usuario no se guardan ni almacenan en ningún momento. Estas claves se mantienen únicamente en la memoria de la aplicación mientras está en uso. Si el usuario actualiza la página o cierra la sesión, las claves se eliminan automáticamente, garantizando así el más alto nivel de seguridad para la información sensible.",
