@@ -1,6 +1,7 @@
 "use client"
 
 import { IaSettingsPopover } from "@/components/ia-settings-popover"
+import { LocaleSwitcher } from "@/components/locale-switcher"
 import { ModeToggle } from "@/components/mode-toggle"
 import { Button } from "@/components/ui/button"
 import {
@@ -13,11 +14,13 @@ import {
 } from "@/components/ui/sheet"
 import { LINKS } from "@/lib/constants"
 import { cn } from "@/lib/utils"
+import { useI18n } from "@/locales/client"
 import { IconMenuDeep } from "@tabler/icons-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 export function MobileNav() {
+  const t = useI18n()
   const pathname = usePathname()
 
   return (
@@ -43,18 +46,17 @@ export function MobileNav() {
                     link.matches.includes(pathname) && "text-violet-400",
                   )}
                 >
-                  {link.name}
+                  {t(link.code)}
                 </Link>
               </li>
             ))}
-            <li>
-              <ModeToggle />
-            </li>
-            <li>
-              <IaSettingsPopover />
-            </li>
           </ul>
         </nav>
+        <div className="flex items-center justify-center space-x-4">
+          <ModeToggle />
+          <IaSettingsPopover />
+          <LocaleSwitcher />
+        </div>
       </SheetContent>
     </Sheet>
   )

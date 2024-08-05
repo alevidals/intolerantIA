@@ -23,8 +23,23 @@ export const MAX_FILES = 4
 export const VALID_IMAGE_EXTENSIONS = ["png", "jpg", "jpeg"]
 
 export const LINKS = [
-  { name: "Home", href: "/", matches: ["/"] },
-  { name: "About", href: "/about", matches: ["/about"] },
-  { name: "Privacy", href: "/privacy", matches: ["/privacy"] },
-  { name: "Scan", href: "/scan", matches: ["/scan", "/scan/result"] },
+  { name: "Home", code: "home" as const, href: "/", matches: ["/"] },
+  {
+    name: "About",
+    code: "about" as const,
+    href: "/about",
+    matches: ["/about"],
+  },
+  {
+    name: "Privacy",
+    code: "privacy" as const,
+    href: "/privacy",
+    matches: ["/privacy"],
+  },
+  {
+    name: "Scan",
+    code: "scan" as const,
+    href: "/scan",
+    matches: ["/scan", "/scan/result"],
+  },
 ]

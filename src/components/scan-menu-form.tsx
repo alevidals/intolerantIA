@@ -1,6 +1,6 @@
 "use client"
 
-import { type FormState, scanAction } from "@/app/(app)/scan/_actions"
+import { type FormState, scanAction } from "@/app/(app)/[locale]/scan/_actions"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
@@ -13,42 +13,46 @@ import {
   VALID_IMAGE_EXTENSIONS,
 } from "@/lib/constants"
 import { useAiSettingsStore, useScanStore, useUserInfoStore } from "@/lib/store"
-import type { UserInfo } from "@/lib/types"
+import type { TranslationKey, UserInfo } from "@/lib/types"
 import { capitalizeFirstLetter, fileToBase64 } from "@/lib/utils"
+import { useI18n } from "@/locales/client"
 import { IconLoader } from "@tabler/icons-react"
 import { useRouter } from "next/navigation"
 import { type ChangeEvent, useEffect, useRef, useState } from "react"
 import { useFormState, useFormStatus } from "react-dom"
 import { toast } from "sonner"
 
-function validateErrors(errors: NonNullable<NonNullable<FormState>["errors"]>) {
+function validateErrors(
+  errors: NonNullable<NonNullable<FormState>["errors"]>,
+  t: ReturnType<typeof useI18n>,
+) {
   if (errors.allergyOrIntolerance?.[0]) {
-    toast.error(errors.allergyOrIntolerance[0])
+    toast.error(t(errors.allergyOrIntolerance[0] as TranslationKey))
     return
   }
 
   if (errors.files?.[0]) {
-    toast.error(errors.files[0])
+    toast.error(t(errors.files[0] as TranslationKey))
     return
   }
 
   if (errors.model?.[0]) {
-    toast.error(errors.model[0])
+    toast.error(t(errors.model[0] as TranslationKey))
     return
   }
 
   if (errors.apiKey?.[0]) {
-    toast.error(errors.apiKey[0])
+    toast.error(t(errors.apiKey[0] as TranslationKey))
     return
   }
 
   if (errors.invalidImage?.[0]) {
-    toast.error(errors.invalidImage[0])
+    toast.error(t(errors.invalidImage[0] as TranslationKey))
     return
   }
 
   if (errors.unexpectedError?.[0]) {
-    toast.error(errors.unexpectedError[0])
+    toast.error(t(errors.unexpectedError[0] as TranslationKey))
     return
   }
 }
@@ -82,17 +86,20 @@ function formDataToUserInfo(data: FormData) {
 }
 
 function SubmitButton() {
+  const t = useI18n()
   const { pending } = useFormStatus()
 
   return (
     <Button className="w-fit gap-x-4 bg-violet-400" disabled={pending}>
-      <span className={`${pending ? "hidden" : "inline"}`}>Submit</span>
+      <span className={`${pending ? "hidden" : "inline"}`}>{t("submit")}</span>
       {pending ? <IconLoader className="animate-spin" /> : null}
     </Button>
   )
 }
 
 export function ScanMenuForm() {
+  const t = useI18n()
+
   const [fileList, setFileList] = useState<FileList | null>(null)
   const router = useRouter()
 
@@ -110,7 +117,7 @@ export function ScanMenuForm() {
     }
 
     if (state?.errors) {
-      validateErrors(state.errors)
+      validateErrors(state.errors, t)
     }
   }, [state])
 
@@ -122,19 +129,17 @@ export function ScanMenuForm() {
     if (!fileList) return
 
     if (fileList.length > MAX_FILES) {
-      toast.error("You can only upload up to 4 images.")
+      toast.error(t("maxFiles"))
       return
     }
 
     if (!validateFormatFiles(fileList)) {
-      toast.error(
-        "Invalid file format. Please upload only images with valid extensions.",
-      )
+      toast.error(t("invalidFormat"))
       return
     }
 
     if (Array.from(fileList).some((file) => file.size > MAX_FILE_SIZE)) {
-      toast.error("The maximum file size is 10MB.")
+      toast.error(t("maxFileSize"))
       return
     }
 
@@ -164,7 +169,7 @@ export function ScanMenuForm() {
   return (
     <form className="flex flex-col gap-4" action={onAction}>
       <div>
-        <h3 className="mb-2 font-bold text-violet-400">Allergies</h3>
+        <h3 className="mb-2 font-bold text-violet-400">{t("allergies")}</h3>
         <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-2">
           {INTOLERANCES_AND_ALLERGIES.map((allergy) => (
             <div
@@ -177,7 +182,7 @@ export function ScanMenuForm() {
                 defaultChecked={userInfoStore.data?.[`${allergy}Allergy`]}
               />
               <Label htmlFor={`${allergy}Allergy`}>
-                {capitalizeFirstLetter(allergy)}
+                {capitalizeFirstLetter(t(allergy))}
               </Label>
             </div>
           ))}
@@ -185,7 +190,7 @@ export function ScanMenuForm() {
       </div>
 
       <div>
-        <h3 className="mb-2 font-bold text-violet-400">Intolerances</h3>
+        <h3 className="mb-2 font-bold text-violet-400">{t("intolerances")}</h3>
         <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-2">
           {INTOLERANCES_AND_ALLERGIES.map((intolerance) => (
             <div
@@ -200,7 +205,7 @@ export function ScanMenuForm() {
                 }
               />
               <Label htmlFor={`${intolerance}Intolerance`}>
-                {capitalizeFirstLetter(intolerance)}
+                {capitalizeFirstLetter(t(intolerance))}
               </Label>
             </div>
           ))}

@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@ai-sdk/openai": "0.0.40",
+    "@formatjs/intl-localematcher": "0.5.4",
     "@hookform/resolvers": "3.9.0",
     "@midudev/tailwind-animations": "0.0.7",
     "@radix-ui/react-checkbox": "1.1.1",
@@ -28,7 +29,9 @@
     "class-variance-authority": "0.7.0",
     "clsx": "2.1.1",
     "framer-motion": "11.3.21",
+    "negotiator": "0.6.3",
     "next": "14.2.5",
+    "next-international": "1.2.4",
     "next-themes": "0.3.0",
     "react": "18",
     "react-dom": "18",
@@ -41,6 +44,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
+    "@types/negotiator": "0.6.3",
     "@types/node": "20",
     "@types/react": "18",
     "@types/react-dom": "18",

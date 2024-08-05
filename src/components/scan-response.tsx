@@ -2,6 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useScanStore } from "@/lib/store"
+import { useI18n } from "@/locales/client"
 import Link from "next/link"
 
 type ResponseCardProps = {
@@ -10,10 +11,12 @@ type ResponseCardProps = {
 }
 
 export function ResponseCard({ type, items }: ResponseCardProps) {
+  const t = useI18n()
+
   const titles = {
-    canEat: "Food that can be eaten",
-    cannotEat: "Food that cannot be eaten",
-    askRestaurant: "Food that should be asked",
+    canEat: t("foodThatCanBeEaten"),
+    cannotEat: t("foodThatCannotBeEaten"),
+    askRestaurant: t("foodThatShouldBeAsked"),
   }
 
   const colors = {
@@ -42,19 +45,19 @@ export function ResponseCard({ type, items }: ResponseCardProps) {
 }
 
 export function ScanResponse() {
+  const t = useI18n()
   const scanStore = useScanStore()
 
   if (!scanStore.data) {
     return (
       <div>
         <p>
-          No data yet. Fill the form to scan the menu and add check allergies
-          and intolerances clicking &nbsp;
+          {t("noDataYet")}{" "}
           <Link
             href="/scan"
             className="font-medium text-violet-400 underline underline-offset-4"
           >
-            here
+            {t("here")}
           </Link>
           .
         </p>

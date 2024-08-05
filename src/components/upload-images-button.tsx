@@ -7,6 +7,7 @@ import {
   VALID_IMAGE_EXTENSIONS,
 } from "@/lib/constants"
 import { cn } from "@/lib/utils"
+import { useI18n } from "@/locales/client"
 import { IconUpload } from "@tabler/icons-react"
 import {
   type Dispatch,
@@ -40,6 +41,8 @@ export function UploadImagesButton({
   setFileList,
   fileList,
 }: Props) {
+  const t = useI18n()
+
   const [isOver, setIsOver] = useState(false)
 
   function handleDrop(event: DragEvent<HTMLDivElement>) {
@@ -51,19 +54,17 @@ export function UploadImagesButton({
     if (!fileList) return
 
     if (fileList.length > MAX_FILES) {
-      toast.error("You can only upload up to 4 images.")
+      toast.error(t("maxFiles"))
       return
     }
 
     if (!validateFormatFiles(fileList)) {
-      toast.error(
-        "Invalid file format. Please upload only images with valid extensions.",
-      )
+      toast.error(t("invalidFormat"))
       return
     }
 
     if (Array.from(fileList).some((file) => file.size > MAX_FILE_SIZE)) {
-      toast.error("The maximum file size is 10MB.")
+      toast.error(t("maxFileSize"))
       return
     }
 
@@ -92,10 +93,9 @@ export function UploadImagesButton({
         }}
       >
         <IconUpload className="h-8 w-8 text-violet-400" />
-        <p className="text-center">Click here or drag and drop your images</p>
+        <p className="text-center">{t("clickToUploadImages")}</p>
         <p className="max-w-sm text-center text-muted-foreground text-sm">
-          The maximum file size is 10MB and you can upload up to 4 images. Te
-          format of the images must be png, jpg or jpeg.
+          {t("imagesRequirements")}
         </p>
       </button>
 

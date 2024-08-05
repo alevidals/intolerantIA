@@ -11,6 +11,9 @@ importers:
       '@ai-sdk/openai':
         specifier: 0.0.40
         version: 0.0.40(zod@3.23.8)
+      '@formatjs/intl-localematcher':
+        specifier: 0.5.4
+        version: 0.5.4
       '@hookform/resolvers':
         specifier: 3.9.0
         version: 3.9.0(react-hook-form@7.52.1(react@18.3.1))
@@ -56,9 +59,15 @@ importers:
       framer-motion:
         specifier: 11.3.21
         version: 11.3.21(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      negotiator:
+        specifier: 0.6.3
+        version: 0.6.3
       next:
         specifier: 14.2.5
         version: 14.2.5(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next-international:
+        specifier: 1.2.4
+        version: 1.2.4
       next-themes:
         specifier: 0.3.0
         version: 0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -90,6 +99,9 @@ importers:
       '@biomejs/biome':
         specifier: 1.8.3
         version: 1.8.3
+      '@types/negotiator':
+        specifier: 0.6.3
+        version: 0.6.3
       '@types/node':
         specifier: '20'
         version: 20.14.13
@@ -273,6 +285,9 @@ packages:
 
   '@floating-ui/utils@0.2.5':
     resolution: {integrity: sha512-sTcG+QZ6fdEUObICavU+aB3Mp8HY4n14wYHdxK4fXjPmv3PXZZeY5RaguJmGyeH/CJQhX3fqKUtS4qc1LoHwhQ==}
+
+  '@formatjs/intl-localematcher@0.5.4':
+    resolution: {integrity: sha512-zTwEpWOzZ2CiKcB93BLngUX59hQkuZjT2+SAQEscSm52peDW/getsawMcWF1rGRpMCX6D7nSJA3CzJ8gn13N/g==}
 
   '@hookform/resolvers@3.9.0':
     resolution: {integrity: sha512-bU0Gr4EepJ/EQsH/IwEzYLsT/PEj5C0ynLQ4m+GSHS+xKH4TfSelhluTgOaoc4kA5s7eCsQbM4wvZLzELmWzUg==}
@@ -755,6 +770,9 @@ packages:
   '@types/estree@1.0.5':
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
 
+  '@types/negotiator@0.6.3':
+    resolution: {integrity: sha512-JkXTOdKs5MF086b/pt8C3+yVp3iDUwG635L7oCH6HvJvvr6lSUU5oe/gLXnPEfYRROHjJIPgCV6cuAg8gGkntQ==}
+
   '@types/node@20.14.13':
     resolution: {integrity: sha512-+bHoGiZb8UiQ0+WEtmph2IWQCjIqg8MDZMAV+ppRRhUZnquF5mQkP/9vpSwJClEiSM/C7fZZExPzfU0vJTyp8w==}
 
@@ -1035,6 +1053,9 @@ packages:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
 
+  international-types@0.8.1:
+    resolution: {integrity: sha512-tajBCAHo4I0LIFlmQ9ZWfjMWVyRffzuvfbXCd6ssFt5u1Zw15DN0UBpVTItXdNa1ls+cpQt3Yw8+TxsfGF8JcA==}
+
   invariant@2.2.4:
     resolution: {integrity: sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==}
 
@@ -1185,6 +1206,13 @@ packages:
     resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
+
+  negotiator@0.6.3:
+    resolution: {integrity: sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==}
+    engines: {node: '>= 0.6'}
+
+  next-international@1.2.4:
+    resolution: {integrity: sha512-JQvp+h2iSgA/t8hu5S/Lwow1ZErJutQRdpnplxjv4VTlCiND8T95fYih8BjkHcVhQbtM+Wu9Mb1CM32wD9hlWQ==}
 
   next-themes@0.3.0:
     resolution: {integrity: sha512-/QHIrsYpd6Kfk7xakK4svpDI5mmXP0gfvCoJdGpZQ2TOrQZmsW0QxjaiLn8wbIKjtm4BTSqLoix4lxYYOnLJ/w==}
@@ -1370,6 +1398,9 @@ packages:
 
   secure-json-parse@2.7.0:
     resolution: {integrity: sha512-6aU+Rwsezw7VR8/nyvKTx8QpWH9FrcYiXXlqC4z5d5XQBDRqtbfsRjnwGyqbi3gddNtWHuEk9OANUotL26qKUw==}
+
+  server-only@0.0.1:
+    resolution: {integrity: sha512-qepMx2JxAa5jjfzxG79yPPq+8BuFToHd1hm7kI+Z4zAq1ftQiP7HcxMhDDItrbtwVeLg/cY2JnKnrcFkmiswNA==}
 
   shebang-command@2.0.0:
     resolution: {integrity: sha512-kHxr2zZpYtdmrN1qDjrrX/Z1rR1kG8Dx+gkpK1G4eXmvXswmcE1hTWBWYUzlraYw1/yZp6YuDY77YtvbN0dmDA==}
@@ -1718,6 +1749,10 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
 
   '@floating-ui/utils@0.2.5': {}
+
+  '@formatjs/intl-localematcher@0.5.4':
+    dependencies:
+      tslib: 2.6.3
 
   '@hookform/resolvers@3.9.0(react-hook-form@7.52.1(react@18.3.1))':
     dependencies:
@@ -2169,6 +2204,8 @@ snapshots:
 
   '@types/estree@1.0.5': {}
 
+  '@types/negotiator@0.6.3': {}
+
   '@types/node@20.14.13':
     dependencies:
       undici-types: 5.26.5
@@ -2453,6 +2490,8 @@ snapshots:
     dependencies:
       function-bind: 1.1.2
 
+  international-types@0.8.1: {}
+
   invariant@2.2.4:
     dependencies:
       loose-envify: 1.4.0
@@ -2576,6 +2615,14 @@ snapshots:
   nanoid@3.3.6: {}
 
   nanoid@3.3.7: {}
+
+  negotiator@0.6.3: {}
+
+  next-international@1.2.4:
+    dependencies:
+      client-only: 0.0.1
+      international-types: 0.8.1
+      server-only: 0.0.1
 
   next-themes@0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
@@ -2751,6 +2798,8 @@ snapshots:
       loose-envify: 1.4.0
 
   secure-json-parse@2.7.0: {}
+
+  server-only@0.0.1: {}
 
   shebang-command@2.0.0:
     dependencies:

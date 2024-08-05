@@ -13,7 +13,9 @@ import {
 } from "react-hook-form"
 
 import { Label } from "@/components/ui/label"
+import type { TranslationKey } from "@/lib/types"
 import { cn } from "@/lib/utils"
+import { useI18n } from "@/locales/client"
 
 const Form = FormProvider
 
@@ -146,8 +148,10 @@ const FormMessage = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, children, ...props }, ref) => {
+  const t = useI18n()
+
   const { error, formMessageId } = useFormField()
-  const body = error ? String(error?.message) : children
+  const body = error ? String(t(error?.message as TranslationKey)) : children
 
   if (!body) {
     return null

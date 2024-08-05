@@ -1,17 +1,15 @@
 import { z } from "zod"
 
 const model = z.enum(["gpt-4", "gpt-4-turbo", "gpt-4o", "gpt-4o-mini"], {
-  required_error: "Model is required. Please select a model on the settings.",
+  required_error: "modelRequired",
 })
 
 const apiKey = z
   .string({
-    required_error:
-      "API key is required. Please add your API key on the settings located on header.",
+    required_error: "apiKeyRequired",
   })
   .min(1, {
-    message:
-      "API key is required. Please add your API key on the setting located on header.",
+    message: "apiKeyRequired",
   })
 
 // TODO: add error messages
@@ -50,11 +48,11 @@ export const scanSchema = z
     model,
     apiKey,
     files: z.array(z.string().min(1)).min(1, {
-      message: "At least one image is required.",
+      message: "oneImageIsRequired",
     }),
   })
   .refine((data) => Object.values(data).some((value) => value === true), {
-    message: "At least one allergy or intolerance is required.",
+    message: "oneIntoleranceOrAllergyRequired",
     path: ["allergyOrIntolerance"],
   })
 

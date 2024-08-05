@@ -26,6 +26,7 @@ import {
 import { aiSettingsSchema } from "@/lib/schemas"
 import { useAiSettingsStore } from "@/lib/store"
 import type { AiSettings } from "@/lib/types"
+import { useI18n } from "@/locales/client"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { IconAdjustmentsHorizontal, IconAlertCircle } from "@tabler/icons-react"
 import { useState } from "react"
@@ -34,6 +35,8 @@ import { toast } from "sonner"
 import colors from "tailwindcss/colors"
 
 export function IaSettingsPopover() {
+  const t = useI18n()
+
   const [open, setOpen] = useState(false)
 
   const aiSettingsStore = useAiSettingsStore()
@@ -48,7 +51,7 @@ export function IaSettingsPopover() {
 
   function onSubmit(data: AiSettings) {
     aiSettingsStore.setData(data)
-    toast.success("Settings saved successfully")
+    toast.success(t("settingsSavedSuccessfully"))
     setOpen(false)
   }
 
@@ -63,18 +66,13 @@ export function IaSettingsPopover() {
         <div className="grid gap-4">
           <Alert className="border-violet-400 text-violet-400">
             <IconAlertCircle color={colors.violet[400]} className="h-4 w-4" />
-            <AlertTitle>Information!</AlertTitle>
-            <AlertDescription>
-              This settings are stored on memory and will not be saved on your
-              device for security reasons. If you refresh the page, the settings
-              will be reset.
-            </AlertDescription>
+            <AlertTitle>{t("information")}</AlertTitle>
+            <AlertDescription>{t("settingsInformation")}</AlertDescription>
           </Alert>
           <div className="space-y-2">
-            <h4 className="font-medium leading-none">IA Settings</h4>
+            <h4 className="font-medium leading-none">{t("iaSettings")}</h4>
             <p className="text-muted-foreground text-sm">
-              Set here your API key for the AI model and select your preferred
-              model.
+              {t("setHereApiAndModel")}
             </p>
           </div>
           <Form {...form}>
@@ -84,7 +82,7 @@ export function IaSettingsPopover() {
                 name="apiKey"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>API key</FormLabel>
+                    <FormLabel>{t("apiKey")}</FormLabel>
                     <FormControl>
                       <Input type="password" {...field} />
                     </FormControl>
@@ -97,7 +95,7 @@ export function IaSettingsPopover() {
                 name="model"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Model</FormLabel>
+                    <FormLabel>{t("model")}</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
@@ -118,7 +116,7 @@ export function IaSettingsPopover() {
                   </FormItem>
                 )}
               />
-              <Button className="bg-violet-400">Save</Button>
+              <Button className="bg-violet-400">{t("save")}</Button>
             </form>
           </Form>
         </div>

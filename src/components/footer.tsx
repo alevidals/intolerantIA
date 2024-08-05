@@ -1,8 +1,12 @@
-export function Footer() {
+import { getI18n } from "@/locales/server"
+
+export async function Footer() {
+  const t = await getI18n()
+
   return (
     <footer className="container my-4">
       <p className="text-left text-sm text-violet-400">
-        Build by{" "}
+        {t("builtBy")}{" "}
         <a
           target="_blank"
           rel="noopener noreferrer"
@@ -11,7 +15,7 @@ export function Footer() {
         >
           alevidals
         </a>
-        . The source code is available on{" "}
+        . {t("sourceCode")}{" "}
         <a
           target="_blank"
           rel="noopener noreferrer"

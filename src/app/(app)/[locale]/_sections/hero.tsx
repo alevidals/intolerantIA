@@ -1,6 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
+import { useI18n } from "@/locales/client"
 import { type AnimationSequence, useAnimate } from "framer-motion"
 import Link from "next/link"
 import { useEffect } from "react"
@@ -50,6 +51,8 @@ const sequence: AnimationSequence = [
 ]
 
 export default function Hero() {
+  const t = useI18n()
+
   const [scope, animate] = useAnimate()
 
   useEffect(() => {
@@ -63,7 +66,7 @@ export default function Hero() {
     >
       <div>
         <h1 className="mx-auto max-w-lg text-center font-bold text-4xl opacity-0 md:text-7xl">
-          Welcome to{" "}
+          {t("welcomeTo")}{" "}
           <span className="text-violet-400">
             {text.split("").map((letter, index) => (
               // biome-ignore lint/suspicious/noArrayIndexKey: <this text will not be changed>
@@ -75,7 +78,7 @@ export default function Hero() {
           !
         </h1>
         <p className="mt-6 max-w-2xl text-pretty text-center text-xl opacity-0 md:text-3xl">
-          The place where you can be sure that the food you eat is safe.
+          {t("thePlaceTo")}
         </p>
         <Button
           id="scan-button"
@@ -83,7 +86,7 @@ export default function Hero() {
           asChild
         >
           <Link href="/scan" className="w-fit">
-            Scan
+            {t("scan")}
           </Link>
         </Button>
       </div>

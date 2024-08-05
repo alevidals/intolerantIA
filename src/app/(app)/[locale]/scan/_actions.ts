@@ -118,9 +118,7 @@ export async function scanAction(
       return {
         success: false,
         errors: {
-          invalidImage: [
-            "The image/s you uploaded are not a menu. Please upload a menu image. If you think this is a mistake, try again.",
-          ],
+          invalidImage: ["wrongImages"],
         },
         data: null,
       }
@@ -137,7 +135,7 @@ export async function scanAction(
     return {
       success: false,
       errors: {
-        unexpectedError: ["An unexpected error occurred. Please try again."],
+        unexpectedError: ["unexpectedError"],
       },
       data: null,
     }
