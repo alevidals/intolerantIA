@@ -6,7 +6,12 @@ import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { INTOLERANCES_AND_ALLERGIES } from "@/lib/constants"
+import {
+  INTOLERANCES_AND_ALLERGIES,
+  MAX_FILES,
+  MAX_FILE_SIZE,
+  VALID_IMAGE_EXTENSIONS,
+} from "@/lib/constants"
 import { useAiSettingsStore, useScanStore, useUserInfoStore } from "@/lib/store"
 import type { UserInfo } from "@/lib/types"
 import { capitalizeFirstLetter, fileToBase64 } from "@/lib/utils"
@@ -46,6 +51,18 @@ function validateErrors(errors: NonNullable<NonNullable<FormState>["errors"]>) {
     toast.error(errors.unexpectedError[0])
     return
   }
+}
+
+function validateFormatFiles(files: FileList) {
+  for (const file of Array.from(files)) {
+    const extension = file.name.split(".").pop()
+
+    if (!VALID_IMAGE_EXTENSIONS.includes(extension ?? "")) {
+      return false
+    }
+  }
+
+  return true
 }
 
 function formDataToUserInfo(data: FormData) {
@@ -169,10 +186,31 @@ export function ScanMenuForm() {
         type="file"
         className="hidden"
         ref={fileInputRef}
-        accept="image/*"
+        accept="image/png, image/jpeg, image/jpg"
         multiple
         onChange={async (event) => {
-          setFileList(event.target.files)
+          const fileList = event.target.files
+
+          if (!fileList) return
+
+          if (fileList.length > MAX_FILES) {
+            toast.error("You can only upload up to 4 images.")
+            return
+          }
+
+          if (!validateFormatFiles(fileList)) {
+            toast.error(
+              "Invalid file format. Please upload only images with valid extensions.",
+            )
+            return
+          }
+
+          if (Array.from(fileList).some((file) => file.size > MAX_FILE_SIZE)) {
+            toast.error("The maximum file size is 10MB.")
+            return
+          }
+
+          setFileList(fileList)
         }}
       />
 
@@ -197,17 +235,22 @@ export function ScanMenuForm() {
         </div>
       ) : null}
 
-      <Button
-        type="button"
-        variant="link"
-        className="self-start px-0"
-        onClick={() => {
-          fileInputRef.current?.click()
-        }}
-      >
-        Upload images
-        <IconUpload className="ml-2 h-4 w-4" />
-      </Button>
+      <div>
+        <Button
+          type="button"
+          variant="link"
+          className="self-start px-0"
+          onClick={() => {
+            fileInputRef.current?.click()
+          }}
+        >
+          Upload images
+          <IconUpload className="ml-2 h-4 w-4" />
+        </Button>
+        <p className="text-muted-foreground text-sm">
+          The maximum file size is 10MB and you can upload up to 4 images.
+        </p>
+      </div>
       <SubmitButton />
     </form>
   )

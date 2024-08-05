@@ -6,7 +6,10 @@ import colors from "tailwindcss/colors"
 
 export default function ScanResultPage() {
   return (
-    <div className="container mt-20 flex items-center justify-center">
+    <div className="container mt-24">
+      <h2 className="mb-10 font-bold text-3xl">
+        Thank you for scanning the menu. Please check the results below.
+      </h2>
       <div>
         <Alert className="mb-4 border-violet-400 text-violet-400">
           <IconAlertCircle color={colors.violet[400]} className="h-4 w-4" />
