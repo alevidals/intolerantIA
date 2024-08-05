@@ -94,12 +94,12 @@ export async function scanAction(
   console.info("Processing...")
 
   const openai = createOpenAI({
-    apiKey: process.env.OPENAI,
+    apiKey: parsed.data.apiKey,
   })
 
   try {
     const result = await generateObject({
-      model: openai("gpt-4o-mini"),
+      model: openai(parsed.data.model),
       maxRetries: 1,
       maxTokens: 1024,
       temperature: 0,
