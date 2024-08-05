@@ -118,6 +118,10 @@ const esTranslations: TranslationKeys = {
   localeSwitcher: "Cambiar el idioma",
   siteDescription:
     "IntolerantIA te permite echar un vistazo rápido al menú del restaurante para ver qué alimentos puedes comer y cuáles no. Especialmente útil para personas con alergias e intolerancias.",
+  pageNotFound: "Página no encontrada",
+  pageNotFoundDescription:
+    "La página que buscas no está disponible en este momento. Es posible que la dirección haya sido escrita incorrectamente, que la página haya sido movida a otra ubicación, o que ya no exista.",
+  pageNotFoundButton: "Volver a la página principal",
 } as const
 
 export default esTranslations

@@ -102,6 +102,9 @@ export type TranslationKeys = {
   spanish: string
   localeSwitcher: string
   siteDescription: string
+  pageNotFound: string
+  pageNotFoundDescription: string
+  pageNotFoundButton: string
 }
 
 export type TranslationKey = keyof TranslationKeys

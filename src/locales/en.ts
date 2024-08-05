@@ -114,6 +114,10 @@ const enTranslations: TranslationKeys = {
   localeSwitcher: "Switch language",
   siteDescription:
     "IntolerantIA allows you to take a quick look at the restaurant's menu to see what foods you can and cannot eat. Especially useful for people with allergies and intolerances",
+  pageNotFound: "Page not found",
+  pageNotFoundDescription:
+    "The page you are looking for is currently unavailable. It is possible that the address was typed incorrectly, the page has been moved to another location, or it no longer exists.",
+  pageNotFoundButton: "Back to home",
 } as const
 
 export default enTranslations
