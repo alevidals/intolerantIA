@@ -1,5 +1,4 @@
 "use server"
-export const maxDuration = 60
 
 import { INTOLERANCES_AND_ALLERGIES } from "@/lib/constants"
 import { scanResponseSchema, scanSchema } from "@/lib/schemas"
