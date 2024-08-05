@@ -10,7 +10,7 @@ const esTranslations: TranslationKeys = {
     "El lugar donde puede estar seguro de que los alimentos que consume son seguros.",
   howItWorks: "¿Cómo funciona?",
   howItWorks1:
-    "Puede seleccionar todas sus alergias e intolerancias alimentarias.",
+    "Puedes seleccionar todas sus alergias e intolerancias alimentarias.",
   howItWorks2: "Haz una foto del menú con la cámara de tu dispositivo.",
   howItWorks3:
     "Con la información sobre tus alergias e intolerancias y el análisis del menú, la app te proporcionará una guía dietética.",

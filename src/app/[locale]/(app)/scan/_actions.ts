@@ -118,7 +118,7 @@ export async function scanAction(
       return {
         success: false,
         errors: {
-          invalidImage: ["wrongImages"],
+          invalidImage: ["invalidImages"],
         },
         data: null,
       }
