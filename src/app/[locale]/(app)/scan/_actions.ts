@@ -130,7 +130,10 @@ export async function scanAction(
       errors: null,
     }
   } catch (error) {
-    console.error(error)
+    if (error instanceof Error) {
+      console.error(error.message)
+      console.log(error.message)
+    }
 
     return {
       success: false,
