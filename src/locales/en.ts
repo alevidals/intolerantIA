@@ -91,7 +91,7 @@ const enTranslations: TranslationKeys = {
   apiKey: "API key",
   model: "Model",
   apiKeyRequired:
-    "API key is required. Please add your API key on the setting located on header.",
+    "API key is required. Please add your API key on the setting located on header. If you need help about how to configure it, click the button.",
   light: "Light",
   dark: "Dark",
   system: "System",
@@ -119,6 +119,13 @@ const enTranslations: TranslationKeys = {
     "The page you are looking for is currently unavailable. It is possible that the address was typed incorrectly, the page has been moved to another location, or it no longer exists.",
   pageNotFoundButton: "Back to home",
   menu: "Navigation menu",
+  help: "Help",
+  howToConfigureIA: "How to configure the IA?",
+  howToConfigureIADescription1: "In the top menu you will find this icon",
+  howToConfigureIADescription2:
+    "which if you click on will display a form where you can configure both the API key and the AI model you want to use. If you are using the application on a mobile device, you will not see the icon directly in the top menu, but you can access it from the button in the top right corner",
+  howToConfigureIADescription3:
+    "(in the menu that opens, it is located at the bottom).",
 } as const
 
 export default enTranslations

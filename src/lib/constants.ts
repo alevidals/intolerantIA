@@ -41,6 +41,12 @@ export const LINKS = [
     matches: locales.map((locale) => `${locale}/privacy`),
   },
   {
+    name: "Help",
+    code: "help" as const,
+    href: "/help",
+    matches: locales.map((locale) => `${locale}/help`),
+  },
+  {
     name: "Scan",
     code: "scan" as const,
     href: "/scan",

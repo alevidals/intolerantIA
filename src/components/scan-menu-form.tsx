@@ -22,10 +22,13 @@ import { type ChangeEvent, useEffect, useRef, useState } from "react"
 import { useFormState, useFormStatus } from "react-dom"
 import { toast } from "sonner"
 
-function validateErrors(
-  errors: NonNullable<NonNullable<FormState>["errors"]>,
-  t: ReturnType<typeof useI18n>,
-) {
+type ValidateErrorsArgs = {
+  errors: NonNullable<NonNullable<FormState>["errors"]>
+  t: ReturnType<typeof useI18n>
+  router: ReturnType<typeof useRouter>
+}
+
+function validateErrors({ errors, t, router }: ValidateErrorsArgs) {
   if (errors.allergyOrIntolerance?.[0]) {
     toast.error(t(errors.allergyOrIntolerance[0] as TranslationKey))
     return
@@ -42,7 +45,12 @@ function validateErrors(
   }
 
   if (errors.apiKey?.[0]) {
-    toast.error(t(errors.apiKey[0] as TranslationKey))
+    toast.error(t(errors.apiKey[0] as TranslationKey), {
+      action: {
+        label: t("help"),
+        onClick: () => router.push("/help"),
+      },
+    })
     return
   }
 
@@ -117,7 +125,11 @@ export function ScanMenuForm() {
     }
 
     if (state?.errors) {
-      validateErrors(state.errors, t)
+      validateErrors({
+        errors: state.errors,
+        t,
+        router,
+      })
     }
   }, [state])
 

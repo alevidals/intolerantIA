@@ -93,7 +93,7 @@ const esTranslations: TranslationKeys = {
   apiKey: "Clave de API",
   model: "Modelo",
   apiKeyRequired:
-    "La clave API es necesaria. Por favor, añada su clave API en la configuración situada en la cabecera.",
+    "La clave API es necesaria. Por favor, añada su clave API en la configuración situada en la cabecera. Si necesitas ayuda acerca de como configurarla, haz clic en el botón.",
   light: "Claro",
   dark: "Oscuro",
   system: "Sistema",
@@ -123,6 +123,13 @@ const esTranslations: TranslationKeys = {
     "La página que buscas no está disponible en este momento. Es posible que la dirección haya sido escrita incorrectamente, que la página haya sido movida a otra ubicación, o que ya no exista.",
   pageNotFoundButton: "Volver a la página principal",
   menu: "Menú de navegación",
+  help: "Ayuda",
+  howToConfigureIA: "¿Cómo configurar la IA?",
+  howToConfigureIADescription1: "En el menú superior encontrarás un icono",
+  howToConfigureIADescription2:
+    "en el que si haces clic se desplegará un formulario donde podrás configurar tanto la API key como el modelo de IA que quieras utilizar. Si estás usando la aplicación en un dispositivo móvil, no verás el icono directamente en el menú superior, pero puedes acceder a él desde el botón de la esquina superior derecha",
+  howToConfigureIADescription3:
+    "(en el menú que se abre, se encontrará en la parte inferior).",
 } as const
 
 export default esTranslations
