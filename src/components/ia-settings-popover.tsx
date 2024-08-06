@@ -109,7 +109,9 @@ export function IaSettingsPopover() {
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select a verified email to display" />
+                          <SelectValue
+                            placeholder={t("selectModelToDisplay")}
+                          />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>

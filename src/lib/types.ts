@@ -112,6 +112,7 @@ export type TranslationKeys = {
   howToConfigureIADescription2: string
   howToConfigureIADescription3: string
   modelOrder: string
+  selectModelToDisplay: string
 }
 
 export type TranslationKey = keyof TranslationKeys

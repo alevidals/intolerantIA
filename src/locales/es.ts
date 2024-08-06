@@ -131,6 +131,7 @@ const esTranslations: TranslationKeys = {
   howToConfigureIADescription3:
     "(en el menú que se abre, se encontrará en la parte inferior).",
   modelOrder: "Los modelos en este orden son los más precisos",
+  selectModelToDisplay: "Selecciona un modelo para mostrar",
 } as const
 
 export default esTranslations
