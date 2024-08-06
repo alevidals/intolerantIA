@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -44,7 +45,7 @@ export function IaSettingsPopover() {
   const form = useForm<AiSettings>({
     defaultValues: {
       apiKey: "",
-      model: "gpt-4o-mini",
+      model: "gpt-4-turbo",
     },
     resolver: zodResolver(aiSettingsSchema),
   })
@@ -118,6 +119,10 @@ export function IaSettingsPopover() {
                         <SelectItem value="gpt-4o-mini">gpt-4o-mini</SelectItem>
                       </SelectContent>
                     </Select>
+                    <FormDescription>
+                      {t("modelOrder")}: gpt-4, gpt-4-turbo, gpt-4o,
+                      gpt-4o-mini.
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}

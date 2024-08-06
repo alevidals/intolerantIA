@@ -130,6 +130,7 @@ const esTranslations: TranslationKeys = {
     "en el que si haces clic se desplegará un formulario donde podrás configurar tanto la API key como el modelo de IA que quieras utilizar. Si estás usando la aplicación en un dispositivo móvil, no verás el icono directamente en el menú superior, pero puedes acceder a él desde el botón de la esquina superior derecha",
   howToConfigureIADescription3:
     "(en el menú que se abre, se encontrará en la parte inferior).",
+  modelOrder: "Los modelos en este orden son los más precisos",
 } as const
 
 export default esTranslations

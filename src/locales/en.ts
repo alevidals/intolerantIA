@@ -126,6 +126,7 @@ const enTranslations: TranslationKeys = {
     "which if you click on will display a form where you can configure both the API key and the AI model you want to use. If you are using the application on a mobile device, you will not see the icon directly in the top menu, but you can access it from the button in the top right corner",
   howToConfigureIADescription3:
     "(in the menu that opens, it is located at the bottom).",
+  modelOrder: "The models in this order are the most accurate",
 } as const
 
 export default enTranslations
