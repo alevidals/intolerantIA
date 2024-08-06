@@ -82,7 +82,7 @@ const esTranslations: TranslationKeys = {
   here: "aquí",
   foodThatCanBeEaten: "Alimentos que se pueden comer",
   foodThatCannotBeEaten: "Alimentos que no se pueden comer",
-  foodThatShouldBeAsked: "Alimentos que deberían preguntarse",
+  foodWithoutClassification: "Sin clasificar",
   scanAgain: "Escanear de nuevo",
   information: "¡Información!",
   settingsInformation:

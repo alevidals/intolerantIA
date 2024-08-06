@@ -80,7 +80,7 @@ const enTranslations: TranslationKeys = {
   here: "here",
   foodThatCanBeEaten: "Food that can be eaten",
   foodThatCannotBeEaten: "Food that cannot be eaten",
-  foodThatShouldBeAsked: "Food that should be asked",
+  foodWithoutClassification: "Without classification",
   scanAgain: "Scan again",
   information: "Information!",
   settingsInformation:

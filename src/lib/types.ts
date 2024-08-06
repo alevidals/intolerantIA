@@ -75,7 +75,7 @@ export type TranslationKeys = {
   here: string
   foodThatCanBeEaten: string
   foodThatCannotBeEaten: string
-  foodThatShouldBeAsked: string
+  foodWithoutClassification: string
   scanAgain: string
   information: string
   settingsInformation: string

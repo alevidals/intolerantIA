@@ -16,7 +16,7 @@ export function ResponseCard({ type, items }: ResponseCardProps) {
   const titles = {
     canEat: t("foodThatCanBeEaten"),
     cannotEat: t("foodThatCannotBeEaten"),
-    askRestaurant: t("foodThatShouldBeAsked"),
+    askRestaurant: t("foodWithoutClassification"),
   }
 
   const colors = {
