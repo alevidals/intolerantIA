@@ -15,7 +15,7 @@ export default function RootLayout({
   const locale = getCurrentLocale()
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning className="relative">
       <body
         className={cn(
           spaceGrotesk.className,
