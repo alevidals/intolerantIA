@@ -36,7 +36,6 @@ const sequence: AnimationSequence = [
     },
     {
       duration: 1,
-      delay: 0.2,
     },
   ],
   [
@@ -46,6 +45,7 @@ const sequence: AnimationSequence = [
     },
     {
       duration: 1,
+      at: 1.8,
     },
   ],
 ]
