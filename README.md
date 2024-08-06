@@ -1,53 +1,70 @@
-<a href="https://intolerantia.vercel.app" target="_blank" style="font-size: 30px;">
+<!-- <a href="https://intolerantia.vercel.app" target="_blank" style="font-size: 30px;">
 IntolerantIA
-</a>
+</a> -->
 
-<img src="./assets/logo.svg" alt="logo" width="100" style="transform: rotate(-12deg)" />
+<div align="center">
+  <a href="https://intolerantia.vercel.app" target="_blank">
+    <img src="./assets/logo.svg" alt="logo" width="100" style="transform: rotate(-12deg)" />
+  </a>
+  <p>
+    <b>
+      The place where you can be sure that the food you eat is safe.
+    </b>
+  </p>
+</div>
 
 <details style="margin-top: 20px;">
   <summary>Table of Contents</summary>
 
-- [Screenshots](#screenshots)
-- [Website](#website)
-- [To start](#to-start)
-  - [Prerequisites](#prerequisites)
+- [🖼️ Screenshots](#️-screenshots)
+- [🌐 Website](#-website)
+- [🚀 Getting Started](#-getting-started)
+  - [Dependencies](#dependencies)
   - [Installation](#installation)
 
 </details>
 
-# Screenshots
+# 🖼️ Screenshots
 
-![Mobile screenshot](./assets/mobile-mock.png)
-![Desktop screenshot](./assets/desktop-mock.png)
+<div>
+  <img src="./assets/mobile-mock.png" alt="Mobile screenshot" width="500" />
+</div>
+<div>
+  <img src="./assets/desktop-mock.png" alt="Desktop screenshot" width="500" />
+</div>
 
-# Website
+# 🌐 Website
 
 If you want to see the website, you can visit [IntolerantIA](https://intolerantia.vercel.app).
 
-# To start
+# 🚀 Getting Started
 
-## Prerequisites
+## Dependencies
 
-- Node > 20 version. You can use [NVM](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating) to setup a node version manager.
+> [!IMPORTANT]
+> This project requires **Node.js version 20** or higher.
 
-- Package manager
-  - PNPM
-    ```sh
-    npm install -g pnpm
-    ```
+```bash
+# Install pnpm if you don't have it:
+npm install -g pnpm
+```
 
 ## Installation
 
 1. Clone the repository
-    ```sh
-    git clone https://github.com/alevidals/intolerantIA.git
-    ```
 
-2. Install the packages (You can use `npm` or `yarn` instead of `pnpm` if you like)
-    ```sh
-    pnpm install
-    ```
+```bash
+git clone https://github.com/alevidals/intolerantIA.git
+```
 
-3. Execute the project (You can use `npm` or `yarn` instead of `pnpm` if you like)
-    ```sh
-    pnpm run dev
+2. Install the packages
+
+```bash
+pnpm install
+```
+
+3. Execute the project
+
+```sh
+pnpm run dev
+```
