@@ -93,7 +93,7 @@ const esTranslations: TranslationKeys = {
   apiKey: "Clave de API",
   model: "Modelo",
   apiKeyRequired:
-    "La clave API es necesaria. Por favor, añada su clave API en la configuración situada en la cabecera. Si necesitas ayuda acerca de como configurarla, haz clic en el botón.",
+    "La clave API es necesaria. Por favor, añada su clave API en la configuración situada en la cabecera. Si necesitas ayuda acerca de como configurarla, haz clic en el botón o visita la página de ayuda.",
   light: "Claro",
   dark: "Oscuro",
   system: "Sistema",

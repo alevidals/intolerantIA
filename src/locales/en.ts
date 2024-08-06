@@ -91,7 +91,7 @@ const enTranslations: TranslationKeys = {
   apiKey: "API key",
   model: "Model",
   apiKeyRequired:
-    "API key is required. Please add your API key on the setting located on header. If you need help about how to configure it, click the button.",
+    "API key is required. Please add your API key on the setting located on header. If you need help about how to configure it, click the button or visit the help page.",
   light: "Light",
   dark: "Dark",
   system: "System",
