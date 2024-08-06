@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { cn } from "@/lib/utils"
 import { useChangeLocale, useCurrentLocale, useI18n } from "@/locales/client"
-import { IconChevronDown } from "@tabler/icons-react"
+import { IconChevronDown, IconLanguage } from "@tabler/icons-react"
 import { useState } from "react"
 
 export function LocaleSwitcher() {
@@ -23,6 +23,7 @@ export function LocaleSwitcher() {
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="flex h-8 items-center gap-x-2 px-2">
+          <IconLanguage className="h-5 w-5" />
           {locale.toUpperCase()}
           <IconChevronDown
             className={cn(
