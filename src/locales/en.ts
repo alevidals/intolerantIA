@@ -128,6 +128,9 @@ const enTranslations: TranslationKeys = {
     "(in the menu that opens, it is located at the bottom).",
   modelOrder: "The models in this order are the most accurate",
   selectModelToDisplay: "Select a model to display",
+  theUserHasAllergies: "The user has allergies to",
+  theUserHasIntolerances: "The user has intolerances to",
+  noDataToShow: "No data to show.",
 } as const
 
 export default enTranslations

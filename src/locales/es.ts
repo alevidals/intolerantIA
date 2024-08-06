@@ -132,6 +132,9 @@ const esTranslations: TranslationKeys = {
     "(en el menú que se abre, se encontrará en la parte inferior).",
   modelOrder: "Los modelos en este orden son los más precisos",
   selectModelToDisplay: "Selecciona un modelo para mostrar",
+  theUserHasAllergies: "El usuario tiene alergia/s a",
+  theUserHasIntolerances: "El usuario tiene intolerancia/s a",
+  noDataToShow: "No hay datos para mostrar.",
 } as const
 
 export default esTranslations

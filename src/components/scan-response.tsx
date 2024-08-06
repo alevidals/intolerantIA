@@ -1,7 +1,8 @@
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { useScanStore } from "@/lib/store"
+import { useScanStore, useUserInfoStore } from "@/lib/store"
+import type { TranslationKey } from "@/lib/types"
 import { useI18n } from "@/locales/client"
 import Link from "next/link"
 
@@ -34,11 +35,15 @@ export function ResponseCard({ type, items }: ResponseCardProps) {
         <CardTitle className={`${color}`}>{title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <ul className="list-inside list-disc">
-          {items.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
+        {items.length > 0 ? (
+          <ul className="list-inside list-disc">
+            {items.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        ) : (
+          <p>{t("noDataToShow")}</p>
+        )}
       </CardContent>
     </Card>
   )
@@ -47,6 +52,19 @@ export function ResponseCard({ type, items }: ResponseCardProps) {
 export function ScanResponse() {
   const t = useI18n()
   const scanStore = useScanStore()
+  const userInfoStore = useUserInfoStore()
+
+  const allergies = Object.entries(userInfoStore.data ?? {})
+    .filter(([key, value]) => key.includes("Allergy") && value === true)
+    .map(([key]) =>
+      t(key.split("Allergy")[0] as TranslationKey).toLocaleLowerCase(),
+    )
+
+  const intolerances = Object.entries(userInfoStore.data ?? {})
+    .filter(([key, value]) => key.includes("Intolerance") && value === true)
+    .map(([key]) =>
+      t(key.split("Intolerance")[0] as TranslationKey).toLocaleLowerCase(),
+    )
 
   if (!scanStore.data) {
     return (
@@ -66,13 +84,30 @@ export function ScanResponse() {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-      <ResponseCard items={scanStore.data?.canEat ?? []} type="canEat" />
-      <ResponseCard items={scanStore.data?.cannotEat ?? []} type="cannotEat" />
-      <ResponseCard
-        items={scanStore.data?.askRestaurant ?? []}
-        type="askRestaurant"
-      />
+    <div>
+      <div className="mb-4">
+        {allergies.length > 0 ? (
+          <p>
+            {t("theUserHasAllergies")}: {allergies.join(", ")}.
+          </p>
+        ) : null}
+        {intolerances.length > 0 ? (
+          <p>
+            {t("theUserHasIntolerances")}: {intolerances.join(", ")}.
+          </p>
+        ) : null}
+      </div>
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+        <ResponseCard items={scanStore.data?.canEat ?? []} type="canEat" />
+        <ResponseCard
+          items={scanStore.data?.cannotEat ?? []}
+          type="cannotEat"
+        />
+        <ResponseCard
+          items={scanStore.data?.askRestaurant ?? []}
+          type="askRestaurant"
+        />
+      </div>
     </div>
   )
 }
