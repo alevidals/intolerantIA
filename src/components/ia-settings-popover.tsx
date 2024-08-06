@@ -45,7 +45,7 @@ export function IaSettingsPopover() {
   const form = useForm<AiSettings>({
     defaultValues: {
       apiKey: "",
-      model: "gpt-4-turbo",
+      model: "gpt-4",
     },
     resolver: zodResolver(aiSettingsSchema),
   })
