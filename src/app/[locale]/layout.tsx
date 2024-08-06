@@ -10,6 +10,7 @@ const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] })
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getI18n()
+  const locale = getCurrentLocale()
 
   return {
     openGraph: {
@@ -20,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: "IntolerantIA",
       images: [
         {
-          url: "https://intolerantia.vercel.app/og.png",
+          url: `https://intolerantia.vercel.app/${locale}-og.png`,
           width: 1920,
           height: 1080,
           alt: "IntolerantIA",
