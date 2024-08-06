@@ -3,6 +3,7 @@ import { ThemeProvider } from "next-themes"
 import { Space_Grotesk } from "next/font/google"
 import "./globals.css"
 import { Toaster } from "@/components/ui/sonner"
+import { getCurrentLocale } from "@/locales/server"
 
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] })
 
@@ -11,8 +12,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const locale = getCurrentLocale()
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={cn(
           spaceGrotesk.className,
