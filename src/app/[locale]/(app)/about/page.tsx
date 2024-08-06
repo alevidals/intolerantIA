@@ -15,9 +15,6 @@ export default async function AboutPage() {
   return (
     <div className="container my-20">
       <h1 className="mt-40 text-center text-7xl">{t("about")}</h1>
-      <div className="mx-auto mt-4 w-fit rounded-md bg-violet-400 px-2 py-1">
-        {t("introducingIntolerantIA")}
-      </div>
       <p className="mx-auto mt-10 max-w-xl text-center text-base text-muted-foreground leading-loose">
         {t("about1")}
       </p>
