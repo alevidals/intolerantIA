@@ -15,29 +15,6 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "IntolerantIA",
     description: t("siteDescription"),
-    keywords: [
-      "intolerance",
-      "allergy",
-      "intolerant",
-      "allergic",
-      "food",
-      "menu",
-      "restaurant",
-      "safe",
-      "guide",
-    ],
-    authors: [
-      {
-        name: "Alejandro Vidal",
-        url: "https://github.com/alevidals",
-      },
-    ],
-    creator: "Alejandro Vidal",
-    icons: {
-      icon: "/favicon.ico",
-      shortcut: "/favicon.ico",
-      apple: "/favicon.ico",
-    },
   }
 }
 

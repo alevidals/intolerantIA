@@ -3,9 +3,32 @@ import { ThemeProvider } from "next-themes"
 import { Space_Grotesk } from "next/font/google"
 import "./globals.css"
 import { Toaster } from "@/components/ui/sonner"
-import { getCurrentLocale } from "@/locales/server"
+import { getCurrentLocale, getI18n } from "@/locales/server"
+import type { Metadata } from "next"
 
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] })
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getI18n()
+
+  return {
+    openGraph: {
+      type: "website",
+      url: "https://intolerantia.vercel.app",
+      title: "IntolerantIA",
+      description: t("siteDescription"),
+      siteName: "IntolerantIA",
+      images: [
+        {
+          url: "https://intolerantia.vercel.app/og.png",
+          width: 1920,
+          height: 1080,
+          alt: "IntolerantIA",
+        },
+      ],
+    },
+  }
+}
 
 export default function RootLayout({
   children,
