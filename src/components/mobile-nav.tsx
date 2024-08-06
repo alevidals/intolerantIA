@@ -41,7 +41,7 @@ export function MobileNav() {
           <SheetDescription className="hidden" />
         </SheetHeader>
         <nav className="flex-1 ">
-          <ul className="flex flex-col gap-x-4">
+          <ul className="flex flex-col gap-y-4">
             {LINKS.map((link) => (
               <li key={link.name}>
                 <Link

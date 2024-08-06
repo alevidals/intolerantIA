@@ -1,7 +1,3 @@
-<!-- <a href="https://intolerantia.vercel.app" target="_blank" style="font-size: 30px;">
-IntolerantIA
-</a> -->
-
 <div align="center">
   <a href="https://intolerantia.vercel.app" target="_blank">
     <img src="./assets/logo.svg" alt="logo" width="100" style="transform: rotate(-12deg)" />
