@@ -75,7 +75,7 @@ export async function scanAction(
     prompt += ` The user's intolerances are: ${intolerances.join(",")}.`
   }
 
-  prompt += ` Return the result in JSON format with the following structure: {"canEat": [], "cannotEat": [], "askRestaurant": [], "success": true/false}. If any provided input is not a menu, set "success" to false. Do not write anything else. Escape any characters that need to be escaped or is not valid on JSON.`
+  prompt += ` Return the result in JSON format with the following structure: {"canEat": [], "cannotEat": [], "askRestaurant": [], "success": true/false}. If any provided input is not a menu, set "success" to false this is very important. Do not write anything else. Escape any characters that need to be escaped or is not valid on JSON.`
 
   const content: UserContent = [
     {

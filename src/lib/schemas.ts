@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-const model = z.enum(["gpt-4", "gpt-4-turbo", "gpt-4o", "gpt-4o-mini"], {
+const model = z.enum(["gpt-4-turbo", "gpt-4o", "gpt-4o-mini"], {
   required_error: "modelRequired",
 })
 
