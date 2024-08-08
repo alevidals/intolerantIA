@@ -23,10 +23,10 @@
 # 🖼️ Screenshots
 
 <div>
-  <img src="./assets/mobile-mock.png" alt="Mobile screenshot" width="500" />
+  <img src="./assets/mobile-mock.png" alt="Mobile screenshot" />
 </div>
 <div>
-  <img src="./assets/desktop-mock.png" alt="Desktop screenshot" width="500" />
+  <img src="./assets/desktop-mock.png" alt="Desktop screenshot" />
 </div>
 
 # 🌐 Website
