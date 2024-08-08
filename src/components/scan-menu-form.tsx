@@ -13,8 +13,8 @@ import {
   VALID_IMAGE_EXTENSIONS,
 } from "@/lib/constants"
 import { useAiSettingsStore, useScanStore, useUserInfoStore } from "@/lib/store"
-import type { TranslationKey, UserInfo } from "@/lib/types"
-import { capitalizeFirstLetter, fileToBase64 } from "@/lib/utils"
+import type { ImageFile, TranslationKey, UserInfo } from "@/lib/types"
+import { capitalizeFirstLetter, fileToImageFile } from "@/lib/utils"
 import { useI18n } from "@/locales/client"
 import { IconLoader } from "@tabler/icons-react"
 import { useRouter } from "next/navigation"
@@ -108,7 +108,7 @@ function SubmitButton() {
 export function ScanMenuForm() {
   const t = useI18n()
 
-  const [fileList, setFileList] = useState<FileList | null>(null)
+  const [files, setFiles] = useState<ImageFile[]>([])
   const router = useRouter()
 
   const scanStore = useScanStore()
@@ -135,7 +135,7 @@ export function ScanMenuForm() {
 
   const fileInputRef = useRef<HTMLInputElement>(null)
 
-  function handleOnChangeFile(event: ChangeEvent<HTMLInputElement>) {
+  async function handleOnChangeFile(event: ChangeEvent<HTMLInputElement>) {
     const fileList = event.target.files
 
     if (!fileList) return
@@ -155,18 +155,18 @@ export function ScanMenuForm() {
       return
     }
 
-    setFileList(fileList)
-  }
-
-  async function onAction(data: FormData) {
     const promises = Array.from(fileList ?? []).map(
-      async (file) => await fileToBase64(file),
+      async (file) => await fileToImageFile(file),
     )
 
     const base64files = await Promise.all(promises)
 
-    for (const file of base64files) {
-      data.append("files", file)
+    setFiles(base64files)
+  }
+
+  async function onAction(data: FormData) {
+    for (const file of files) {
+      data.append("files", file.data)
     }
 
     data.append("model", aiSettingsStore.data?.model ?? "gpt-4o-mini")
@@ -237,8 +237,8 @@ export function ScanMenuForm() {
 
       <UploadImagesButton
         fileInputRef={fileInputRef}
-        fileList={fileList}
-        setFileList={setFileList}
+        files={files}
+        setFiles={setFiles}
       />
 
       <SubmitButton />

@@ -13,6 +13,11 @@ export type ScanForm = z.infer<typeof scanSchema>
 export type ScanResponse = z.infer<typeof scanResponseSchema>
 export type AiSettings = z.infer<typeof aiSettingsSchema>
 
+export type ImageFile = {
+  name: string
+  data: string
+}
+
 export type TranslationKeys = {
   home: string
   about: string

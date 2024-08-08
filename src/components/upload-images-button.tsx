@@ -6,7 +6,8 @@ import {
   MAX_FILE_SIZE,
   VALID_IMAGE_EXTENSIONS,
 } from "@/lib/constants"
-import { cn } from "@/lib/utils"
+import type { ImageFile } from "@/lib/types"
+import { cn, fileToImageFile } from "@/lib/utils"
 import { useI18n } from "@/locales/client"
 import { IconUpload } from "@tabler/icons-react"
 import {
@@ -20,8 +21,8 @@ import { toast } from "sonner"
 
 type Props = {
   fileInputRef: RefObject<HTMLInputElement>
-  fileList: FileList | null
-  setFileList: Dispatch<SetStateAction<FileList | null>>
+  files: ImageFile[]
+  setFiles: Dispatch<SetStateAction<ImageFile[]>>
 }
 
 function validateFormatFiles(files: FileList) {
@@ -36,16 +37,12 @@ function validateFormatFiles(files: FileList) {
   return true
 }
 
-export function UploadImagesButton({
-  fileInputRef,
-  setFileList,
-  fileList,
-}: Props) {
+export function UploadImagesButton({ fileInputRef, setFiles, files }: Props) {
   const t = useI18n()
 
   const [isOver, setIsOver] = useState(false)
 
-  function handleDrop(event: DragEvent<HTMLDivElement>) {
+  async function handleDrop(event: DragEvent<HTMLDivElement>) {
     event.preventDefault()
     event.stopPropagation()
 
@@ -68,7 +65,13 @@ export function UploadImagesButton({
       return
     }
 
-    setFileList(fileList)
+    const promises = Array.from(fileList ?? []).map(
+      async (file) => await fileToImageFile(file),
+    )
+
+    const base64files = await Promise.all(promises)
+    setFiles(base64files)
+
     setIsOver(false)
   }
 
@@ -99,32 +102,18 @@ export function UploadImagesButton({
         </p>
       </button>
 
-      {Array.from(fileList ?? []).length > 0 ? (
+      {files.length > 0 ? (
         <div className="mx-auto mb-10 w-fit">
           <MenuPreviews
-            images={fileList}
-            deleteImage={(image) => {
-              if (
-                fileInputRef.current &&
-                fileList &&
-                Array.from(fileList).length === 1
-              ) {
+            images={files}
+            deleteImage={(index) => {
+              if (fileInputRef.current && files.length === 1) {
                 fileInputRef.current.value = ""
-                setFileList(null)
+                setFiles([])
                 return
               }
 
-              const dataTransfer = new DataTransfer()
-
-              const files = Array.from(fileList ?? []).filter(
-                (file) => image.name !== file.name,
-              )
-
-              for (const file of files) {
-                dataTransfer.items.add(file)
-              }
-
-              setFileList(dataTransfer.files)
+              setFiles(files.filter((_, i) => i !== index))
             }}
           />
         </div>
