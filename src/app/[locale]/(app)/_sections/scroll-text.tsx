@@ -15,6 +15,7 @@ export function ScrollText() {
 
   const scroll = useScroll({
     target: ref,
+    offset: ["-450px", "end end"],
   })
 
   scroll.scrollYProgress.on("change", (y) => {
