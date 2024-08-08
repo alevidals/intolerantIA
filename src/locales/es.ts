@@ -17,7 +17,7 @@ const esTranslations: TranslationKeys = {
   whyUseIntolerantIA: "¿Por qué usar IntolerantIA?",
   whyUseIntolerantIAResponse:
     "Algunos restaurantes no enumeran los alérgenos en sus menús, por lo que IntolerantIA le ayuda a revisar rápidamente el menú de un restaurante para identificar qué platos no puede comer, cuáles puede comer y cuáles debe consultar con el restaurante. Recuerda que esta herramienta está pensada para ayudarte, y que siempre debes verificar la información con el restaurante para mayor seguridad.",
-  builtBy: "Construido por",
+  builtBy: "Hecho por",
   sourceCode: "El código fuente está disponible en",
   introducingIntolerantIA: "Introduciendo IntolerantIA",
   about1:
