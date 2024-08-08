@@ -1,5 +1,6 @@
 import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
+import { ScrollProgess } from "@/components/scroll-progress"
 import { I18nProviderClient } from "@/locales/client"
 import { getI18n } from "@/locales/server"
 import type { Metadata } from "next"
@@ -22,6 +23,7 @@ export default function AppLayout({ children, params }: AppLayoutProps) {
   return (
     <>
       <I18nProviderClient locale={params.locale}>
+        <ScrollProgess />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

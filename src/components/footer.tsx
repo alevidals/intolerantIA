@@ -4,7 +4,7 @@ export async function Footer() {
   const t = await getI18n()
 
   return (
-    <footer className="container my-4">
+    <footer className="container mt-4 mb-6">
       <p className="text-left text-sm text-violet-400">
         {t("builtBy")}{" "}
         <a
