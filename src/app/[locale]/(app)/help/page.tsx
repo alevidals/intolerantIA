@@ -13,7 +13,7 @@ export default async function HelpPage() {
 
   return (
     <div className="container my-20">
-      <h1 className="mt-40 text-center text-7xl">{t("help")}</h1>
+      <h1 className="mt-40 text-center text-5xl md:text-7xl">{t("help")}</h1>
 
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="item-1">

@@ -14,7 +14,7 @@ export default async function AboutPage() {
 
   return (
     <div className="container my-20">
-      <h1 className="mt-40 text-center text-7xl">{t("about")}</h1>
+      <h1 className="mt-40 text-center text-5xl md:text-7xl">{t("about")}</h1>
       <p className="mx-auto mt-10 max-w-xl text-center text-base text-muted-foreground leading-loose">
         {t("about1")}
       </p>

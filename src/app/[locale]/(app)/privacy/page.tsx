@@ -14,7 +14,9 @@ export default async function PrivacyPage() {
 
   return (
     <div className="container my-20">
-      <h1 className="mt-40 text-center text-7xl">{t("privacyPolicy")}</h1>
+      <h1 className="mt-40 text-center text-5xl md:text-7xl">
+        {t("privacyPolicy")}
+      </h1>
       <p className="mx-auto mt-10 max-w-xl text-center text-lg text-muted-foreground leading-loose">
         {t("weTakePrivacy")}
       </p>
