@@ -64,18 +64,29 @@ export async function scanAction(
     }
   }
 
-  let prompt =
-    "You are a nutritionist expert in allergies and intolerance Analyze the following restaurant menu and classify each item into three categories based on the specified allergies and intolerances: canEat, cannotEat, and askRestaurant (for items that might be dangerous and need confirmation from the restaurant)."
-
-  if (allergies.length > 0) {
-    prompt += `The user's allergies are: ${allergies.join(",")}.`
-  }
+  let prompt = `You are a nutritionist expert in allergies and intolerance. Your task is to analyze the following images to determine if they all correspond to menus from a restaurant, bar, ice-cream parlour, or similar establishment. If any image does not correspond to a menu, return the JSON: {"success": false}. If all images are confirmed to be menus, proceed to analyze the content based on the user's allergies and intolerances`
 
   if (intolerances.length > 0) {
-    prompt += ` The user's intolerances are: ${intolerances.join(",")}.`
+    prompt += ` The user's intolerances are: ${intolerances.join(", ")}.`
   }
 
-  prompt += ` Return the result in JSON format with the following structure: {"canEat": [], "cannotEat": [], "askRestaurant": [], "success": true/false}. If any provided input is not a menu, set "success" to false. Do not write anything else. Escape any characters that need to be escaped or is not valid on JSON.`
+  if (allergies.length > 0) {
+    prompt += ` The user's allergies are: ${allergies.join(", ")}.`
+  }
+
+  prompt += ` Classify each menu item into one of three categories:
+
+  - **canEat**: Items that are safe for the user to eat.
+  - **cannotEat**: Items that the user should avoid.
+  - **askRestaurant**: Items that might be risky and require confirmation from the restaurant.
+
+  Return the result in the following JSON format:
+  {
+    "canEat": [],
+    "cannotEat": [],
+    "askRestaurant": [],
+    "success": true
+  }`
 
   const content: UserContent = [
     {
